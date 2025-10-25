@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject playGround;
     public GameObject player;
     public GameObject Enemy;
+    public float radius;
 
-    private Vector3 minPlayBounds;
-    private Vector3 maxPlayBounds;
     private Vector3 createdPos;
+    private Vector3 spawnPos;
     private GameObject curEnemy;
 
     WaitForSeconds spawnDelay = new WaitForSeconds(1f);
@@ -18,9 +17,6 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Bounds groundBounds = playGround.GetComponent<MeshRenderer>().bounds;
-        minPlayBounds = groundBounds.center - groundBounds.extents;
-        maxPlayBounds = groundBounds.center + groundBounds.extents;
         StartCoroutine(EnemySpawn());
     }
 
@@ -28,12 +24,20 @@ public class EnemySpawner : MonoBehaviour
     {
         while(GameManager.Instance.Playing)
         {
-            createdPos.x = Random.Range(minPlayBounds.x, maxPlayBounds.x);
-            createdPos.z = Random.Range(minPlayBounds.z, maxPlayBounds.z);
-            curEnemy = Instantiate(Enemy, createdPos, transform.rotation);
+            createdPos = Random.insideUnitCircle * radius;
+            spawnPos.x = createdPos.x + 10;
+            spawnPos.y = 0;
+            spawnPos.z = createdPos.y + 10;
+            createdPos = GameManager.Instance.player.transform.position + spawnPos;
+            curEnemy = Instantiate(Enemy, createdPos, Quaternion.identity);
             curEnemy.GetComponent<EnemyController>().Init(player);
 
             yield return spawnDelay;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(GameManager.Instance.player.transform.position, radius + 10);
     }
 }

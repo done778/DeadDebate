@@ -8,31 +8,33 @@ public class PlayerContoller : MonoBehaviour
     public float moveSpeed;
     public float attackCoolTime;
     public GameObject bullet;
-    private float elapsedCoolTime;
+    private Renderer rend;
     private Vector3 muzzle;
+    private float elapsedCoolTime;
     private int experience;
     private int expRequired;
     private int level;
+    private int hp;
+    private bool isInvincibilityl;
 
-    private void Awake()
-    {
-        GameManager.Instance.GameStart();
-    }
 
     private void Start()
     {
+        rend = transform.GetChild(0).GetComponent<Renderer>();
+        GameManager.Instance.GameStart();
+
         level = 1;
+        hp = 3;
         expRequired = 3;
         experience = 0;
         elapsedCoolTime = 0;
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            TakeDamage(1);
         }
     }
 
@@ -49,7 +51,7 @@ public class PlayerContoller : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void Die()
     {
         GameManager.Instance.GameOver();
     }
@@ -61,7 +63,27 @@ public class PlayerContoller : MonoBehaviour
 
         return inputDirection.normalized;
     }
+    IEnumerator TakeDamage()
+    {
+        isInvincibilityl = true;
+        yield return new WaitForSeconds(0.2f);
+        rend.material.color = Color.yellow;
+        yield return new WaitForSeconds(0.3f);
+        isInvincibilityl = false;
+    }
 
+    public void TakeDamage(int damage)
+    {
+        if (isInvincibilityl) return;
+
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Die();
+        }
+        rend.material.color = Color.blue;
+        StartCoroutine(TakeDamage());
+    }
     private void Move(Vector3 Direction)
     {
         if (Direction == Vector3.zero) return;
