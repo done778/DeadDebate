@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public bool Playing { get; private set; }
     private Camera mainCamera;
     public GameObject player;
-    public readonly float surviveTime = 600f;
+    public readonly float surviveTime = 180f;
+    private float playingTime;
     private Vector3 cameraPos;
 
     void Awake()
@@ -40,14 +41,27 @@ public class GameManager : MonoBehaviour
             cameraPos.y = player.transform.position.y + 20;
             cameraPos.z = player.transform.position.z - 4;
             mainCamera.transform.position = cameraPos;
+
+            // ���� �ð� ����. UI�� ������Ʈ
+            playingTime += Time.deltaTime;
+            if (playingTime >= surviveTime)
+            {
+                StageClear();
+            }
+        }
     }
 
     public void GameStart()
     {
+        playingTime = 0f;
         Playing = true;
     }
     public void GameOver()
     {
         Playing = false;
+    public void StageClear()
+    {
+
+    }
     }
 }
