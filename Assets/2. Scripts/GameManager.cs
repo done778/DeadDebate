@@ -5,13 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public bool Playing { get; private set; }
     private Camera mainCamera;
     public GameObject player;
     public readonly float surviveTime = 180f;
     private float playingTime;
     private Vector3 cameraPos;
 
+    public bool Playing { get; private set; }
+
+    // ½Ì±ÛÅæ
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Ä«ï¿½Þ¶ï¿½ ï¿½Ê±ï¿½È­
+        // Ä«¸Þ¶ó ÃÊ±âÈ­
         mainCamera = Camera.main;
         mainCamera.transform.rotation = Quaternion.Euler(80f, 0f, 0f);
     }
@@ -36,13 +38,13 @@ public class GameManager : MonoBehaviour
     {
         if (Playing == true)
         {
-            //Ä«ï¿½Þ¶ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½. 20ï¿½ï¿½ -4ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½
+            //Ä«¸Þ¶ó°¡ ÇÃ·¹ÀÌ¾î¸¦ µû¶ó °¡µµ·Ï ÇÔ. 20°ú -4´Â ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸® »ó¼ö
             cameraPos.x = player.transform.position.x;
             cameraPos.y = player.transform.position.y + 20;
             cameraPos.z = player.transform.position.z - 4;
             mainCamera.transform.position = cameraPos;
 
-            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½. UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+            // »ýÁ¸ ½Ã°£ ÃøÁ¤. UI¿¡ ¾÷µ¥ÀÌÆ®
             playingTime += Time.deltaTime;
             if (playingTime >= surviveTime)
             {
@@ -56,12 +58,32 @@ public class GameManager : MonoBehaviour
         playingTime = 0f;
         Playing = true;
     }
-    public void GameOver()
+
+    public void GameOver(bool isClear)
     {
         Playing = false;
+        Time.timeScale = 0f;
+        if (isClear)
+        {
+            StageClear();
+        }
+        else
+        {
+            StageFailed();
+        }
+    }
+
+    // ½ºÅ×ÀÌÁö µµÀü ¼º°ø
+    // ½Â¸® °ü·Ã UI ¶ç¿ì°í ·Îºñ·Î µ¹¾Æ°¡±â
     public void StageClear()
     {
 
     }
+
+    // ½ºÅ×ÀÌÁö µµÀü ½ÇÆÐ
+    // ÆÐ¹è °ü·Ã UI ¶ç¿ì°í ·Îºñ·Î µ¹¾Æ°¡±â
+    public void StageFailed()
+    {
+
     }
 }
