@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject player;
     public GameObject Enemy;
     public float radius;
 
@@ -22,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator EnemySpawn()
     {
-        while(GameManager.Instance.Playing)
+        while (GameManager.Instance.Playing)
         {
             createdPos = Random.insideUnitCircle * radius;
             spawnPos.x = createdPos.x + 10;
@@ -30,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
             spawnPos.z = createdPos.y + 10;
             createdPos = GameManager.Instance.player.transform.position + spawnPos;
             curEnemy = Instantiate(Enemy, createdPos, Quaternion.identity);
-            curEnemy.GetComponent<EnemyController>().Init(player);
+            curEnemy.GetComponent<EnemyController>().Init(GameManager.Instance.player);
 
             yield return spawnDelay;
         }
