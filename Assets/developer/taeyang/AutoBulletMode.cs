@@ -22,7 +22,7 @@ public class AutoBulletMode : MonoBehaviour
         //적이 없으면 원래대로 앞으로 발사
     }
 
-    //가까운적 참는 함수
+    //가까운적 찾는 함수
     private void FindNearEnemy()
     {
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // 적들을 담은 리스트
