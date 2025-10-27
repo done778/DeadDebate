@@ -5,17 +5,17 @@ using UnityEngine;
 public class PlayerContoller : MonoBehaviour
 {
     const int MUZZLE_INDEX = 1;
-    public float moveSpeed;
-    public float attackCoolTime;
+    public float moveSpeed; // 이동속도
+    public float attackCoolTime; // 공격속도
     public GameObject bullet;
     private Renderer rend;
     private Vector3 muzzle;
-    private float elapsedCoolTime;
-    private int experience;
-    private int expRequired;
-    private int level;
-    private int hp;
-    private bool isInvincibilityl;
+    private float elapsedCoolTime; // 쿨타임 경과 시간
+    private int experience; // 경험치
+    private int expRequired; // 필요 경험치
+    private int level; // 레벨
+    private int hp; // 체력
+    private bool isInvincibilityl; // 무적
 
 
     private void Start()
@@ -44,7 +44,7 @@ public class PlayerContoller : MonoBehaviour
         Move(inputDirection);
 
         elapsedCoolTime -= Time.deltaTime;
-        if (elapsedCoolTime < 0) 
+        if (elapsedCoolTime < 0)
         {
             ShootBullet();
             elapsedCoolTime = attackCoolTime;
@@ -99,7 +99,7 @@ public class PlayerContoller : MonoBehaviour
     public void GetExp(int amount)
     {
         experience++;
-        if ( experience >= expRequired)
+        if (experience >= expRequired)
         {
             LevelUp();
             experience = 0;

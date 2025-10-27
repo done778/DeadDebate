@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            int damage = other.gameObject.GetComponent<BulletContoller>().power;
+            int damage = other.gameObject.GetComponent<BulletController>().damage;
             TakeDamage(damage);
             Destroy(other.gameObject);
         }

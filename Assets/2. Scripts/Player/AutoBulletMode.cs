@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AutoBulletMode : MonoBehaviour
 {
-    private TYBulletController bulletController; // 불렛컨트롤러 참조
+    private BulletController bulletController; // 불렛컨트롤러 참조
     private Transform target; // 적 위치
     [SerializeField] private float searchRadius = 50f; // 공격반응 반경
 
     private void Start()
     {
-        bulletController = GetComponent<TYBulletController>();
+        bulletController = GetComponent<BulletController>();
 
         FindNearEnemy();
         

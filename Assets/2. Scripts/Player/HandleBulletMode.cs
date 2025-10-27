@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HandleBulletMode : MonoBehaviour
 {
-    private TYBulletController bulletController;
+    private BulletController bulletController;
     [SerializeField] private float maxRayDistance = 100f; // 마우스 감지 거리
     [SerializeField] private LayerMask aimLayerMask; // 포인터가 인식할 레이어 (맵)
 
     private void Start()
     {
-        bulletController = GetComponent<TYBulletController>();
+        bulletController = GetComponent<BulletController>();
 
         ShotBulletDirection();
     }
