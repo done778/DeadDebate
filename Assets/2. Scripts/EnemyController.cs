@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     //실제 수치들
     private EnemyData currentStat;
     public EnemyData CurrentStat => currentStat;
+    public bool isBoss = false;
 
     private GameObject target;
     #endregion
@@ -41,19 +42,24 @@ public class EnemyController : MonoBehaviour
     }
 
     #region method
-    public void Init(GameObject player)
+    public void Init(GameObject player, bool isBoss = false)
     {
         target = player;
+
+        this.isBoss = isBoss;
     }
 
-    public void Init(GameObject player, int changeValue)
+    public void Init(GameObject player, int changeValue, bool isBoss = false)
     {
         target = player;
+
         currentStat.healthPoint = Mathf.RoundToInt(data.healthPoint * changeValue);
         currentStat.attakPower = Mathf.RoundToInt(data.attakPower * changeValue);
         currentStat.moveSpeed *= changeValue;
         currentStat.attackSpeed *= changeValue;
         currentStat.exp = Mathf.RoundToInt(data.exp * changeValue);
+
+        this.isBoss = isBoss;
     }
 
     private void TakeDamage(int dmg)
