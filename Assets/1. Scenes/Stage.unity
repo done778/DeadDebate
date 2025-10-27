@@ -184,6 +184,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1048467156130827832, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
   m_PrefabInstance: {fileID: 145926677}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &145926679 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
+  m_PrefabInstance: {fileID: 145926677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &327432917
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +432,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1468066794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468066795}
+  m_Layer: 0
+  m_Name: BossTrs(test)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468066795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468066794}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5860305, y: -8.217549, z: 13.9391775}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879744647
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +568,7 @@ GameObject:
   - component: {fileID: 2099206312}
   - component: {fileID: 2099206311}
   m_Layer: 0
-  m_Name: EnemySpawner (1)
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,9 +586,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe7aba87f515d4784bd78b68efbfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 145926678}
-  Enemy: {fileID: 8622035515571568916, guid: ac9f419bf2b8e1e4cbe8f7f8fe1a47a4, type: 3}
-  radius: 15
+  trs: {fileID: 145926679}
+  bossTrs: {fileID: 1468066795}
+  maxRadius: 20
+  exclusionRadius: 10
+  setEnemys:
+  - {fileID: 8622035515571568916, guid: ac9f419bf2b8e1e4cbe8f7f8fe1a47a4, type: 3}
+  - {fileID: 8622035515571568916, guid: 2123e6d470ad8d843805f44bf36daf98, type: 3}
+  timer: 0
 --- !u!4 &2099206312
 Transform:
   m_ObjectHideFlags: 0
@@ -578,3 +619,4 @@ SceneRoots:
   - {fileID: 327432921}
   - {fileID: 828908362}
   - {fileID: 145926677}
+  - {fileID: 1468066795}
