@@ -5,10 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private Camera cm;
     public bool Playing { get; private set; }
+    private Camera mainCamera;
     public GameObject player;
     public readonly float surviveTime = 600f;
+    private Vector3 cameraPos;
 
     void Awake()
     {
@@ -25,12 +26,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        cm = Camera.main;
+        // ī�޶� �ʱ�ȭ
+        mainCamera = Camera.main;
+        mainCamera.transform.rotation = Quaternion.Euler(80f, 0f, 0f);
     }
+
     void Update()
     {
         if (Playing == true)
-            cm.transform.position = new Vector3(player.transform.position.x, cm.transform.position.y, player.transform.position.z - 18);
+        {
+            //ī�޶� �÷��̾ ���� ������ ��. 20�� -4�� �÷��̾���� �Ÿ� ���
+            cameraPos.x = player.transform.position.x;
+            cameraPos.y = player.transform.position.y + 20;
+            cameraPos.z = player.transform.position.z - 4;
+            mainCamera.transform.position = cameraPos;
     }
 
     public void GameStart()
