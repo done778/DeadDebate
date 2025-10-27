@@ -59,8 +59,9 @@ public class GameManager : MonoBehaviour
         Playing = true;
     }
 
-    public void GameOver(bool isClear)
+    public void GameOver()
     {
+        bool isClear = true;
         Playing = false;
         Time.timeScale = 0f;
         if (isClear)
