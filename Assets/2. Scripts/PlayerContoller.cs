@@ -109,7 +109,7 @@ public class PlayerContoller : MonoBehaviour
     private void LevelUp()
     {
         level++;
-        Debug.Log($"·¹º§ÀÌ {level - 1}¿¡¼­ {level}ÀÌ µÇ¾ú½À´Ï´Ù.");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ {level - 1}ï¿½ï¿½ï¿½ï¿½ {level}ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
     }
 
     private void ShootBullet()
