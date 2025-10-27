@@ -70,7 +70,13 @@ public class EnemySpawner : MonoBehaviour
             createdPos = GetSpawnOffset() + GameManager.Instance.player.transform.position;
 
             //curEnemy = Instantiate(prefabs[ENEMY_TYPE.Normal], createdPos, Quaternion.identity);
-            curEnemy = Instantiate(setEnemys[Random.Range(0, 2)], createdPos, Quaternion.identity);
+            int randomCreate = Random.Range(0, 10) + 1;
+
+            //todo : 테스트용 리팩토링 요망
+            if (randomCreate < 8) randomCreate = 0;//근접
+            else randomCreate = 1;//원거리
+
+            curEnemy = Instantiate(setEnemys[randomCreate], createdPos, Quaternion.identity);
             curEnemy.GetComponent<EnemyController>().Init(GameManager.Instance.player);
 
             curEnemy.transform.SetParent(transform);
