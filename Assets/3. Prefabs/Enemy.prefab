@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab6eaa14e73e6e43b60329dc4a5d5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
   moveSpeed: 4
   maxHp: 5
 --- !u!136 &7465810473906576345
