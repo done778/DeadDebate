@@ -87,16 +87,19 @@ public class TYPlayerContoller : MonoBehaviour
         rend.material.color = Color.blue;
         StartCoroutine(TakeDamage());
     }
-    private void Move(Vector3 Direction)
+    private void Move(Vector3 direction)
     {
-        if (Direction == Vector3.zero) return;
+        if (direction == Vector3.zero) return;
 
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.LookRotation(Direction),
-            0.02f
-        );
-        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
+        Vector3 move = direction * Time.deltaTime * moveSpeed;
+        transform.Translate(move, Space.World);
+
+        //transform.rotation = Quaternion.Lerp(
+        //    transform.rotation,
+        //    Quaternion.LookRotation(Direction),
+        //    0.02f
+        //);
+        //transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
 
     }
     public void GetExp(int amount)
