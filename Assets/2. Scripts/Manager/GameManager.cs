@@ -9,13 +9,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     public GameObject player;
-    private Camera mainCamera;
-    private Vector3 cameraPos;
+    
     public readonly float surviveTime = 180f;
     private float playingTime;
 
-    public event Action OnGameStart; // 게임 시작 이벤트
-    public event Action OnGameOver; // 게임 종료 이벤트
+    public Action OnGameStart; // 게임 시작 이벤트
+    public Action OnGameOver; // 게임 종료 이벤트
     public event Action OnStageClear; // 스테이지 클리어 성공 이벤트
     public event Action OnStageFailed; // 스테이지 클리어 실패 이벤트
 
@@ -42,33 +41,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        OnGameStart = GameStart;
+        OnGameOver = GameOver;
     }
 
-    void Start()
-    {
-        // 카메라 초기화
-        mainCamera = Camera.main;
-        mainCamera.transform.rotation = Quaternion.Euler(80f, 0f, 0f);
-    }
-
-    void Update()
-    {
-        if (Playing == true)
-        {
-            //카메라가 플레이어를 따라 가도록 함. 20과 -4는 플레이어와의 거리 상수
-            cameraPos.x = player.transform.position.x;
-            cameraPos.y = player.transform.position.y + 20;
-            cameraPos.z = player.transform.position.z - 4;
-            mainCamera.transform.position = cameraPos;
-
-            // 생존 시간 측정. UI에 업데이트
-            playingTime += Time.deltaTime;
-            if (playingTime >= surviveTime)
-            {
-                GameOver();
-            }
-        }
-    }
     public void GameStart()
     {
         playingTime = 0f;
