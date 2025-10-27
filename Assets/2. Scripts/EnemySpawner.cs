@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
     Coroutine spawnCoroutine = null;
     Coroutine bossSpawnCoroutine = null;
-    WaitForSeconds spawnDelay = new WaitForSeconds(1f);
+    WaitForSeconds spawnDelay = new WaitForSeconds(0.3f);
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
         //yield return WaitUntil(위에 로직이 다 될 동안 기다려)
 
         //3분후 생성
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(400f);
         GameObject boss = Instantiate(prefabs[ENEMY_TYPE.Normal], bossTrs);
         boss.GetComponent<EnemyController>().Init(GameManager.Instance.player, 3, true);
         boss.transform.localScale *= 5f;

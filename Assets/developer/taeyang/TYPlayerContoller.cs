@@ -17,9 +17,12 @@ public class TYPlayerContoller : MonoBehaviour
     private int hp; // 체력
     private bool isInvincibilityl; // 무적
 
+    private AttackModeController attackModeController; // 공격모드
 
     private void Start()
     {
+        attackModeController = GetComponent<AttackModeController>(); // 공격모드
+
         rend = transform.GetChild(0).GetComponent<Renderer>();
         GameManager.Instance.GameStart();
 
@@ -41,12 +44,12 @@ public class TYPlayerContoller : MonoBehaviour
     void Update()
     {
         Vector3 inputDirection = GetNormalizedDirection();
-        Move(inputDirection);
+        Move(inputDirection);        
 
         elapsedCoolTime -= Time.deltaTime;
         if (elapsedCoolTime < 0)
         {
-            ShootBullet();
+            attackModeController.GetCurrentMode().Attack(this); // 공격방식
             elapsedCoolTime = attackCoolTime;
         }
     }
@@ -111,8 +114,8 @@ public class TYPlayerContoller : MonoBehaviour
         level++;
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
     }
-
-    private void ShootBullet()
+    
+    public void ShootBullet()
     {
         muzzle = transform.GetChild(MUZZLE_INDEX).GetComponent<Transform>().position;
         Instantiate(bullet, muzzle, transform.rotation);
