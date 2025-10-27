@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 createdPos;
     private GameObject curEnemy;
-    
+
     public float timer;
 
     Coroutine spawnCoroutine = null;
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         Initialize();
-        //spawnCoroutine = StartCoroutine(EnemySpawn());
+        spawnCoroutine = StartCoroutine(EnemySpawn());
         bossSpawnCoroutine = StartCoroutine(BossSpawn());
     }
 
@@ -45,7 +45,8 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in setEnemys)
         {
             EnemyData data = enemy.GetComponent<EnemyController>().data;
-            prefabs.Add(data.enemyType, enemy);
+            if (!prefabs.ContainsKey(data.enemyType))
+                prefabs.Add(data.enemyType, enemy);
         }
 
     }
@@ -68,7 +69,8 @@ public class EnemySpawner : MonoBehaviour
             //랜덤 위치 값에서 플레이어 중심에서 위치가 정해지도록
             createdPos = GetSpawnOffset() + GameManager.Instance.player.transform.position;
 
-            curEnemy = Instantiate(prefabs[ENEMY_TYPE.Normal], createdPos, Quaternion.identity);
+            //curEnemy = Instantiate(prefabs[ENEMY_TYPE.Normal], createdPos, Quaternion.identity);
+            curEnemy = Instantiate(setEnemys[Random.Range(0, 2)], createdPos, Quaternion.identity);
             curEnemy.GetComponent<EnemyController>().Init(GameManager.Instance.player);
 
             curEnemy.transform.SetParent(transform);
@@ -83,9 +85,9 @@ public class EnemySpawner : MonoBehaviour
         //yield return WaitUntil(위에 로직이 다 될 동안 기다려)
 
         //3분후 생성
-        yield return new WaitForSeconds(180f);
+        yield return new WaitForSeconds(4f);
         GameObject boss = Instantiate(prefabs[ENEMY_TYPE.Normal], bossTrs);
-        boss.GetComponent<EnemyController>().Init(GameManager.Instance.player, true);
+        boss.GetComponent<EnemyController>().Init(GameManager.Instance.player, 3, true);
         boss.transform.localScale *= 5f;
 
         boss.transform.SetParent(transform);
