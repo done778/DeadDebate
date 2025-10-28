@@ -69,7 +69,6 @@ public class PlayerContoller : MonoBehaviour
 
     private void Die()
     {
-        GameManager.Instance.GameOver();
         OnPlayerDie?.Invoke(); // 플레이어 사망시
     }
 
