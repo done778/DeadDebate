@@ -71,10 +71,12 @@ public class GameManager : MonoBehaviour
         curPlayer.OnLevelUp += (int temp) => PauseGame();
 
         // 레벨 업 시 스탯 선택지 버튼을 클릭하면 게임을 재개한다.
-        // ??? += PlayGame;
+        UIManager.UIInstance.CloseUIPanel += PlayGame;
 
         // 1초마다 OnTimerUpdate 인보크 발생시키는 코루틴 시작
         timerUpdate = StartCoroutine(PlayingTimer());
+
+        PlayGame();
     }
 
     // 게임 종료 메서드.
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(timerUpdate);
         curPlayer.OnPlayerDie -= StageFailed;
         curPlayer.OnLevelUp -= (int temp) => PauseGame();
+        UIManager.UIInstance.CloseUIPanel -= PlayGame;
         PauseGame();
     }
     // 게임 일시 정지
