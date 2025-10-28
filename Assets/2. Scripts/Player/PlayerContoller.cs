@@ -17,9 +17,12 @@ public class PlayerContoller : MonoBehaviour
     private int hp; // 체력
     private bool isInvincibilityl; // 무적
 
+    private AttackModeController attackModeController; // 공격모드
 
     private void Start()
     {
+        attackModeController = GetComponent<AttackModeController>(); // 공격모드
+
         rend = transform.GetChild(0).GetComponent<Renderer>();
         GameManager.Instance.GameStart();
 
@@ -41,12 +44,12 @@ public class PlayerContoller : MonoBehaviour
     void Update()
     {
         Vector3 inputDirection = GetNormalizedDirection();
-        Move(inputDirection);
+        Move(inputDirection);        
 
         elapsedCoolTime -= Time.deltaTime;
         if (elapsedCoolTime < 0)
         {
-            ShootBullet();
+            attackModeController.GetCurrentMode().Attack(this); // 공격방식
             elapsedCoolTime = attackCoolTime;
         }
     }
@@ -84,16 +87,19 @@ public class PlayerContoller : MonoBehaviour
         rend.material.color = Color.blue;
         StartCoroutine(TakeDamage());
     }
-    private void Move(Vector3 Direction)
+    private void Move(Vector3 direction)
     {
-        if (Direction == Vector3.zero) return;
+        if (direction == Vector3.zero) return;
 
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.LookRotation(Direction),
-            0.02f
-        );
-        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
+        Vector3 move = direction * Time.deltaTime * moveSpeed;
+        transform.Translate(move, Space.World);
+
+        //transform.rotation = Quaternion.Lerp(
+        //    transform.rotation,
+        //    Quaternion.LookRotation(Direction),
+        //    0.02f
+        //);
+        //transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
 
     }
     public void GetExp(int amount)
@@ -111,8 +117,8 @@ public class PlayerContoller : MonoBehaviour
         level++;
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
     }
-
-    private void ShootBullet()
+    
+    public void ShootBullet()
     {
         muzzle = transform.GetChild(MUZZLE_INDEX).GetComponent<Transform>().position;
         Instantiate(bullet, muzzle, transform.rotation);
