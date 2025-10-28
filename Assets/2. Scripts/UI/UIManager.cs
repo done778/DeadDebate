@@ -44,10 +44,16 @@ public class UIManager : MonoBehaviour
 
         curPlayer.OnPlayerDie += OpenGameoverPanel;
         curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();
-
+        // ??? += CloseSelectPanel; // 선택지에서 버튼 클릭시 패널을 비활성화하는 이벤트에 구독해야함.
     }
 
+    // 게임 종료 패널, 선택지 패널 활성화 및 비활성화
     public void OpenGameoverPanel()
+    {
+        gameoverPanel.SetActive(true);
+    }
+
+    public void CloseGameoverPanel()
     {
         gameoverPanel.SetActive(true);
     }
@@ -55,6 +61,11 @@ public class UIManager : MonoBehaviour
     public void OpenSelectPanel()
     {
         levelUpPanel.SetActive(true);
+    }
+
+    public void CloseSelectPanel()
+    {
+        levelUpPanel.SetActive(false);
     }
 
     // Stage 씬 진입을 감지함
