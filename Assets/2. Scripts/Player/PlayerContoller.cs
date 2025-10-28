@@ -5,21 +5,24 @@ using UnityEngine;
 public class PlayerContoller : MonoBehaviour
 {
     const int MUZZLE_INDEX = 1;
-    public float moveSpeed;
-    public float attackCoolTime;
+    public float moveSpeed; // 이동속도
+    public float attackCoolTime; // 공격속도
     public GameObject bullet;
     private Renderer rend;
     private Vector3 muzzle;
-    private float elapsedCoolTime;
-    private int experience;
-    private int expRequired;
-    private int level;
-    private int hp;
-    private bool isInvincibilityl;
+    private float elapsedCoolTime; // 쿨타임 경과 시간
+    private int experience; // 경험치
+    private int expRequired; // 필요 경험치
+    private int level; // 레벨
+    private int hp; // 체력
+    private bool isInvincibilityl; // 무적
 
+    private AttackModeController attackModeController; // 공격모드
 
     private void Start()
     {
+        attackModeController = GetComponent<AttackModeController>(); // 공격모드
+
         rend = transform.GetChild(0).GetComponent<Renderer>();
         GameManager.Instance.GameStart();
 
@@ -41,12 +44,12 @@ public class PlayerContoller : MonoBehaviour
     void Update()
     {
         Vector3 inputDirection = GetNormalizedDirection();
-        Move(inputDirection);
+        Move(inputDirection);        
 
         elapsedCoolTime -= Time.deltaTime;
-        if (elapsedCoolTime < 0) 
+        if (elapsedCoolTime < 0)
         {
-            ShootBullet();
+            attackModeController.GetCurrentMode().Attack(this); // 공격방식
             elapsedCoolTime = attackCoolTime;
         }
     }
@@ -84,22 +87,25 @@ public class PlayerContoller : MonoBehaviour
         rend.material.color = Color.blue;
         StartCoroutine(TakeDamage());
     }
-    private void Move(Vector3 Direction)
+    private void Move(Vector3 direction)
     {
-        if (Direction == Vector3.zero) return;
+        if (direction == Vector3.zero) return;
 
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.LookRotation(Direction),
-            0.02f
-        );
-        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
+        Vector3 move = direction * Time.deltaTime * moveSpeed;
+        transform.Translate(move, Space.World);
+
+        //transform.rotation = Quaternion.Lerp(
+        //    transform.rotation,
+        //    Quaternion.LookRotation(Direction),
+        //    0.02f
+        //);
+        //transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
 
     }
     public void GetExp(int amount)
     {
         experience++;
-        if ( experience >= expRequired)
+        if (experience >= expRequired)
         {
             LevelUp();
             experience = 0;
@@ -111,8 +117,8 @@ public class PlayerContoller : MonoBehaviour
         level++;
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
     }
-
-    private void ShootBullet()
+    
+    public void ShootBullet()
     {
         muzzle = transform.GetChild(MUZZLE_INDEX).GetComponent<Transform>().position;
         Instantiate(bullet, muzzle, transform.rotation);

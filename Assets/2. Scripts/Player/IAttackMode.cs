@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IAttackMode
 {
-    void Attack(TYPlayerContoller player);
+    void Attack(PlayerContoller player);
 }
