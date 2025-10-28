@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -13,15 +13,13 @@ public class LevelUpUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable ì‹¤í–‰");
-        // í™œì„±í™”ê°€ ë˜ë©´ ìš°ì„  ìŠ¤íƒ¯ ì¤‘ ëœë¤ 3ê°œë¥¼ ê°€ì ¸ì˜¨ë‹¤.
+       
+        // È°¼ºÈ­°¡ µÇ¸é ¿ì¼± ½ºÅÈ Áß ·£´ı 3°³¸¦ °¡Á®¿Â´Ù.
         RandomSelectThree();
-        Debug.Log("ëœë¤ 3ê°œ ì„ íƒ ì™„ë£Œ");
+      
 
-        // ìì‹ ë²„íŠ¼ ê°€ì ¸ì˜¤ê¸°.
+        // ÀÚ½Ä ¹öÆ° °¡Á®¿À±â.
         childButton = transform.GetComponentsInChildren<Button>();
-
-        Debug.Log($"í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸° ì™„ë£Œ : ìì‹ ìˆ˜ {childButton.Length}");
 
         TextMeshProUGUI child;
 
@@ -32,8 +30,8 @@ public class LevelUpUIController : MonoBehaviour
             Debug.Log(childButton[i].name);
             child.text = selectedStats[i];
         }
-        // í´ë¦­í•˜ë©´ ì„ íƒí•œ ìŠ¤íƒ¯ì˜ ì •ë³´ë¥¼ ë‹´ì•„ì„œ Invoke
-        // ì € ì´ë²¤íŠ¸ë¥¼ ê²Œì„ ë§¤ë‹ˆì €ë‘ UI ë§¤ë‹ˆì €ê°€ ê²Œì„ì„ ë‹¤ì‹œ ì¬ê°œí•˜ëŠ” ë©”ì„œë“œë¥¼ êµ¬ë…ì‹œì¼œë‘”ë‹¤.
+        // Å¬¸¯ÇÏ¸é ¼±ÅÃÇÑ ½ºÅÈÀÇ Á¤º¸¸¦ ´ã¾Æ¼­ Invoke
+        // Àú ÀÌº¥Æ®¸¦ °ÔÀÓ ¸Å´ÏÀú¶û UI ¸Å´ÏÀú°¡ °ÔÀÓÀ» ´Ù½Ã Àç°³ÇÏ´Â ¸Ş¼­µå¸¦ ±¸µ¶½ÃÄÑµĞ´Ù.
     }
 
     private void RandomSelectThree()
@@ -43,9 +41,9 @@ public class LevelUpUIController : MonoBehaviour
         while (index < selectedStats.Length)
         {
             bool alreadyExist = false;
-            int selected = Random.Range(0, stats.Length); // 0, 4 ë‹ˆê¹Œ 0 ~ 3
+            int selected = Random.Range(0, stats.Length); // 0, 4 ´Ï±î 0 ~ 3
             for (int i = 0; i < index; i++) {
-                if (selectedStats[index] == stats[selected])
+                if (selectedStats[i] == stats[selected])
                 {
                     alreadyExist = true;
                     break;
