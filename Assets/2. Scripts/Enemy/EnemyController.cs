@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor;
@@ -20,6 +21,8 @@ public class EnemyController : MonoBehaviour
     private WaitForSeconds attackDelay;
 
     private PlayerContoller target;
+
+    public event Action OnDeath;
     #endregion
 
     private void Awake()
@@ -158,8 +161,11 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        OnDeath.Invoke();
+        OnDeath = null;
+
         target.GetComponent<PlayerContoller>().GetExp(currentStat.exp);
-        Destroy(gameObject);
+        EnemyPool.Instance.ReturnEnemy(gameObject);
     }
     #endregion
 }

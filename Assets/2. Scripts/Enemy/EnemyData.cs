@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public enum ATTAK_TYPE {
 }
 public enum ENEMY_TYPE
 {
-    Normal,
+    Warrior,Archer
 }
 
 

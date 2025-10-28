@@ -5,66 +5,40 @@ using UnityEngine.Experimental.Rendering;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //플레이어 트랜스폼 주입 추후 삭제 - 기즈모 용
-    public Transform trs;
-
     //스테이미 매니저로 옮겨야함
     public Transform bossTrs;
 
-    public float maxRadius;
-    public int exclusionRadius = 10;
+    [Header("Spawn Settings")]
+    [SerializeField] private Transform player;
 
-    public List<GameObject> setEnemys = new List<GameObject>();
-    private Dictionary<ENEMY_TYPE, GameObject> prefabs = new Dictionary<ENEMY_TYPE, GameObject>();
-
+    //스폰 최대 반경
+    [SerializeField] private float spawnRadius = 20f;
+    //스폰 제외 반경
+    [SerializeField] private float exclusionRadius = 10f;
+    //스폰 주기
+    [SerializeField] private WaitForSeconds spawnDelay = new WaitForSeconds(1f);
+    //스폰 주기 당 마리수
+    [SerializeField] private int spawnPerWave = 1;
+    //스폰 위치
     private Vector3 createdPos;
-    private GameObject curEnemy;
+    //현재 생성된 적 마리수
+    [SerializeField] private int currentEnemyCount = 0;
 
-    public float timer;
 
     Coroutine spawnCoroutine = null;
     Coroutine bossSpawnCoroutine = null;
-    WaitForSeconds spawnDelay = new WaitForSeconds(1f);
 
     // Start is called before the first frame update
     void Start()
     {
-        Initialize();
         spawnCoroutine = StartCoroutine(EnemySpawn());
         bossSpawnCoroutine = StartCoroutine(BossSpawn());
-    }
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
-    }
-
-    private void Initialize()
-    {
-        //초기 세팅 프리팹리스트를 딕셔너리로 변경
-        foreach (var enemy in setEnemys)
-        {
-            EnemyData data = enemy.GetComponent<EnemyController>().data;
-            if (!prefabs.ContainsKey(data.enemyType))
-                prefabs.Add(data.enemyType, enemy);
-        }
-
     }
 
     //스테이지매니저에서 호출~
     public void DoSpawnedEnemy()
     {
-        spawnCoroutine = StartCoroutine(EnemySpawn());
-    }
-
-    public void DoSpawnedBoss()
-    {
-        bossSpawnCoroutine = StartCoroutine(BossSpawn());
-    }
-
-    IEnumerator EnemySpawn()
-    {
-        while (GameManager.Instance.Playing)
+        for (int i = 0; i < spawnPerWave; i++)
         {
             //랜덤 위치 값에서 플레이어 중심에서 위치가 정해지도록
             createdPos = GetSpawnOffset() + GameManager.Instance.player.transform.position;
@@ -76,10 +50,35 @@ public class EnemySpawner : MonoBehaviour
             if (randomCreate < 8) randomCreate = 0;//근접
             else randomCreate = 1;//원거리
 
-            curEnemy = Instantiate(setEnemys[randomCreate], createdPos, Quaternion.identity);
-            curEnemy.GetComponent<EnemyController>().Init(GameManager.Instance.player);
+            EnemyController controller = EnemyPool.Instance.GetEnemy((ENEMY_TYPE)randomCreate, createdPos);
+            if (controller != null)
+            {
+                controller.Init(GameManager.Instance.player);
+                controller.OnDeath += HandleEnemyDeath;
+                currentEnemyCount++;
+            }
 
-            curEnemy.transform.SetParent(transform);
+        }
+    }
+
+    public void DoSpawnedBoss()
+    {
+        //보스 등장 전 처리할 로직들--------
+
+        EnemyController boss = EnemyPool.Instance.GetEnemy(ENEMY_TYPE.Warrior, bossTrs.position);
+
+        boss.Init(GameManager.Instance.player, 3, true);
+        boss.transform.localScale *= 5f;
+        boss.OnDeath += HandleEnemyDeath;
+
+        boss.transform.SetParent(transform);
+    }
+
+    IEnumerator EnemySpawn()
+    {
+        while (GameManager.Instance.Playing)
+        {
+            DoSpawnedEnemy();
 
             yield return spawnDelay;
         }
@@ -92,8 +91,9 @@ public class EnemySpawner : MonoBehaviour
 
         //3분후 생성
         yield return new WaitForSeconds(400f);
-        GameObject boss = Instantiate(prefabs[ENEMY_TYPE.Normal], bossTrs);
-        boss.GetComponent<EnemyController>().Init(GameManager.Instance.player, 3, true);
+        EnemyController boss = EnemyPool.Instance.GetEnemy(ENEMY_TYPE.Warrior, bossTrs.position);
+
+        boss.Init(GameManager.Instance.player, 3, true);
         boss.transform.localScale *= 5f;
 
         boss.transform.SetParent(transform);
@@ -107,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetSpawnOffset()
     {
-        float distance = Random.Range(exclusionRadius, maxRadius);
+        float distance = Random.Range(exclusionRadius, spawnRadius);
 
         float angle = Random.Range(0, 360f) * Mathf.Deg2Rad;
 
@@ -116,11 +116,16 @@ public class EnemySpawner : MonoBehaviour
         return new Vector3(x, 0, z);
     }
 
-    private void OnDrawGizmos()
+    private void HandleEnemyDeath()
     {
-        Gizmos.DrawWireSphere(trs.position, maxRadius);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(trs.position, exclusionRadius);
+        currentEnemyCount--;
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(player.position, spawnRadius);
+
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(player.position, exclusionRadius);
+    //}
 }
