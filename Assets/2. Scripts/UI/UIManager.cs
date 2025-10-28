@@ -24,7 +24,13 @@ public class UIManager : MonoBehaviour
         }
         SceneManager.sceneLoaded += OnSceneLoad;
     }
-   
+
+    private void OnDestroy()
+    {
+        curPlayer.OnPlayerDie -= OpenGameoverPanel;
+        curPlayer.OnLevelUp -= (int temp) => OpenSelectPanel();
+    }
+
     public void LoadScene(string sceneName)
     {
         if (isLoading) return;
