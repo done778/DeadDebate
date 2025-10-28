@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public static UIManager UIInstance { get; private set; }
+    [SerializeField] private GameObject gameoverPanel;
     bool isLoading;
 
     void Awake()
@@ -21,20 +21,17 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    private void Start()
-    {
-        
-    }
    
-   public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName)
     {
         if (isLoading) return;
         isLoading = true;
         SceneManager.LoadScene(sceneName);
         isLoading = false;
     }
-
-
-
+    
+    public void OpenGameoverPanel()
+    {
+        gameoverPanel.SetActive(true);
+    }
 }
