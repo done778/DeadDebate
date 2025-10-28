@@ -12,8 +12,8 @@ public class Timer : MonoBehaviour
     {
         limitTime -= Time.deltaTime;
         if (limitTime < 0) limitTime = 0;
-        Debug.Log(limitTime);
-        // 분:초 형태로 표시
+      
+        
         int minute = Mathf.FloorToInt(limitTime / 60);
         int second = Mathf.FloorToInt(limitTime % 60);
         textTimer.text = $"Time : {minute:00}:{second:00}";
