@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
     Coroutine spawnCoroutine = null;
     Coroutine bossSpawnCoroutine = null;
-    WaitForSeconds spawnDelay = new WaitForSeconds(0.3f);
+    WaitForSeconds spawnDelay = new WaitForSeconds(1f);
 
     // Start is called before the first frame update
     void Start()
