@@ -18,5 +18,5 @@ MonoBehaviour:
   moveSpeed: 2
   attackSpeed: 1
   range: 5
-  enemyType: 0
+  enemyType: 1
   attackType: 2
