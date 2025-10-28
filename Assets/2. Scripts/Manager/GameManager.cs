@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
         // 플레이어가 레벨 업하면 게임을 멈추라고 한다. (매개변수는 안씀)
         curPlayer.OnLevelUp += (int temp) => PauseGame();
 
+        // 레벨 업 시 스탯 선택지 버튼을 클릭하면 게임을 재개한다.
+        // ??? += PlayGame;
+
         // 1초마다 OnTimerUpdate 인보크 발생시키는 코루틴 시작
         timerUpdate = StartCoroutine(PlayingTimer());
     }
