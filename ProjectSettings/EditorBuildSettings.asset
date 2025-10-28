@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/1. Scenes/Title.unity
+    guid: 30e96f682a3445a4fb0b64af61f5e65f
+  - enabled: 1
     path: Assets/1. Scenes/Lobby.unity
     guid: 81d90861c9b401c40be1c8a94b1bfbe6
   - enabled: 1
-    path: Assets/developer/HanGyeol/Stage.unity
-    guid: b981e0348ee830e45a7a932abcb4be15
-  - enabled: 1
-    path: Assets/1. Scenes/Title.unity
-    guid: 30e96f682a3445a4fb0b64af61f5e65f
+    path: Assets/1. Scenes/StageYH.unity
+    guid: cfdb4d060fd22b0459a807358c39bb10
   m_configObjects: {}
