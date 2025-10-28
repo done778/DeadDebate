@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     public GameObject player;
-    [SerializeField] private GameObject gameoverPanel;
+    
     
     public readonly float surviveTime = 180f;
     private float playingTime;
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
         OnGameStart = GameStart;
         OnGameOver = GameOver;
+        Playing = false;
     }
 
     public void GameStart()
@@ -59,8 +60,9 @@ public class GameManager : MonoBehaviour
         bool isClear = true;
         Playing = false;
         StopCoroutine(timerUpdate);
-        Time.timeScale = 0f;
-        gameoverPanel.SetActive(true);
+        PauseGame();
+        OnGameOver?.Invoke();
+        
         if (isClear)
         {
             OnStageClear?.Invoke();
@@ -69,6 +71,18 @@ public class GameManager : MonoBehaviour
         {
             OnStageFailed?.Invoke();
         }
+    }
+
+    // 게임 일시 정지
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    // 게임 재개
+    public void PlayGame()
+    {
+        Time.timeScale = 1f;
     }
 
     // 플레이어가 살아있는 동안 플레이타임 측정 코루틴
