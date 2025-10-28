@@ -1,27 +1,27 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerContoller : MonoBehaviour
 {
     const int MUZZLE_INDEX = 1;
-    public float moveSpeed; // ÀÌµ¿¼Óµµ
-    public float attackCoolTime; // °ø°İ¼Óµµ
+    public float moveSpeed; // ì´ë™ì†ë„
+    public float attackCoolTime; // ê³µê²©ì†ë„
     public GameObject bullet;
     private Renderer rend;
     private Vector3 muzzle;
-    private float elapsedCoolTime; // ÄğÅ¸ÀÓ °æ°ú ½Ã°£
-    private int experience; // °æÇèÄ¡
-    private int expRequired; // ÇÊ¿ä °æÇèÄ¡
-    private int level; // ·¹º§
-    private int hp; // Ã¼·Â
-    private bool isInvincibilityl; // ¹«Àû
+    private float elapsedCoolTime; // ì¿¨íƒ€ì„ ê²½ê³¼ ì‹œê°„
+    private int experience; // ê²½í—˜ì¹˜
+    private int expRequired; // í•„ìš” ê²½í—˜ì¹˜
+    private int level; // ë ˆë²¨
+    private int hp; // ì²´ë ¥
+    private bool isInvincibilityl; // ë¬´ì 
 
-    private AttackModeController attackModeController; // °ø°İ¸ğµå
+    private AttackModeController attackModeController; // ê³µê²©ëª¨ë“œ
 
     private void Start()
     {
-        attackModeController = GetComponent<AttackModeController>(); // °ø°İ¸ğµå
+        attackModeController = GetComponent<AttackModeController>(); // ê³µê²©ëª¨ë“œ
 
         rend = transform.GetChild(0).GetComponent<Renderer>();
         GameManager.Instance.GameStart();
@@ -49,7 +49,7 @@ public class PlayerContoller : MonoBehaviour
         elapsedCoolTime -= Time.deltaTime;
         if (elapsedCoolTime < 0)
         {
-            attackModeController.GetCurrentMode().Attack(this); // °ø°İ¹æ½Ä
+            attackModeController.GetCurrentMode().Attack(this); // ê³µê²©ë°©ì‹
             elapsedCoolTime = attackCoolTime;
         }
     }
@@ -115,7 +115,7 @@ public class PlayerContoller : MonoBehaviour
     private void LevelUp()
     {
         level++;
-        Debug.Log($"·¹º§ÀÌ {level - 1}¿¡¼­ {level}ÀÌ µÇ¾ú½À´Ï´Ù.");
+        Debug.Log($"ë ˆë²¨ì´ {level - 1}ì—ì„œ {level}ì´ ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
     
     public void ShootBullet()

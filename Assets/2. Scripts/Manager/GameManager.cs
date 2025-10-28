@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,15 +14,15 @@ public class GameManager : MonoBehaviour
     public readonly float surviveTime = 180f;
     private float playingTime;
 
-    public Action OnGameStart; // °ÔÀÓ ½ÃÀÛ ÀÌº¥Æ®
-    public Action OnGameOver; // °ÔÀÓ Á¾·á ÀÌº¥Æ®
-    public event Action OnStageClear; // ½ºÅ×ÀÌÁö Å¬¸®¾î ¼º°ø ÀÌº¥Æ®
-    public event Action OnStageFailed; // ½ºÅ×ÀÌÁö Å¬¸®¾î ½ÇÆĞ ÀÌº¥Æ®
+    public Action OnGameStart; // ê²Œì„ ì‹œì‘ ì´ë²¤íŠ¸
+    public Action OnGameOver; // ê²Œì„ ì¢…ë£Œ ì´ë²¤íŠ¸
+    public event Action OnStageClear; // ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ì„±ê³µ ì´ë²¤íŠ¸
+    public event Action OnStageFailed; // ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ì‹¤íŒ¨ ì´ë²¤íŠ¸
 
-    // ÇÑ°á´Ô UI ¾÷µ¥ÀÌÆ® ¸Ş¼­µå¸¦ ¿©±â¿¡ ±¸µ¶ÇÏ¼¼¿ä.
-    public event Action OnTimerUpdate; // 1ÃÊ¸¶´Ù Å¸ÀÌ¸Ó ÀÌº¥Æ®
-    public event Action OnKillCount; // Àû Ã³Ä¡ ½Ã ÀÌº¥Æ® (Àû °ü¸® ÂÊÀ¸·Î)
-    // public event Action OnPlayerHpChange; // ÇÃ·¹ÀÌ¾î HP º¯µ¿ ÀÌº¥Æ® (ÀÌ°Å ÇÃ·¹ÀÌ¾î ÂÊÀ¸·Î)
+    // í•œê²°ë‹˜ UI ì—…ë°ì´íŠ¸ ë©”ì„œë“œë¥¼ ì—¬ê¸°ì— êµ¬ë…í•˜ì„¸ìš”.
+    public event Action OnTimerUpdate; // 1ì´ˆë§ˆë‹¤ íƒ€ì´ë¨¸ ì´ë²¤íŠ¸
+    public event Action OnKillCount; // ì  ì²˜ì¹˜ ì‹œ ì´ë²¤íŠ¸ (ì  ê´€ë¦¬ ìª½ìœ¼ë¡œ)
+    // public event Action OnPlayerHpChange; // í”Œë ˆì´ì–´ HP ë³€ë™ ì´ë²¤íŠ¸ (ì´ê±° í”Œë ˆì´ì–´ ìª½ìœ¼ë¡œ)
 
     private Coroutine timerUpdate;
 
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     WaitForSeconds playTimer = new WaitForSeconds(1f);
 
-    // ½Ì±ÛÅæ
+    // ì‹±ê¸€í†¤
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ »ì¾ÆÀÖ´Â µ¿¾È ÇÃ·¹ÀÌÅ¸ÀÓ ÃøÁ¤ ÄÚ·çÆ¾
+    // í”Œë ˆì´ì–´ê°€ ì‚´ì•„ìˆëŠ” ë™ì•ˆ í”Œë ˆì´íƒ€ì„ ì¸¡ì • ì½”ë£¨í‹´
     IEnumerator PlayingTimer()
     {
         while (Playing)

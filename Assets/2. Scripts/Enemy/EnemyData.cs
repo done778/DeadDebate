@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum ATTAK_TYPE { 
-    None, //¸ö¹Ú¸¸
-    Melee, //±ÙÁ¢
-    Ranged,//¿ø°Å¸®
-    Hybrid,//ÇÏÀÌºê¸®µå
+    None, //ëª¸ë°•ë§Œ
+    Melee, //ê·¼ì ‘
+    Ranged,//ì›ê±°ë¦¬
+    Hybrid,//í•˜ì´ë¸Œë¦¬ë“œ
 }
 public enum ENEMY_TYPE
 {

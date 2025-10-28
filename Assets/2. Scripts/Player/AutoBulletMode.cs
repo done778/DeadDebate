@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +6,13 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
 {
     public void Attack(PlayerContoller player)
     {
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // ÀûµéÀ» ´ãÀº ¸®½ºÆ®
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // ì ë“¤ì„ ë‹´ì€ ë¦¬ìŠ¤íŠ¸
 
-        if (enemys.Length == 0) // ÀûÀÌ ¾øÀ¸¸é
+        if (enemys.Length == 0) // ì ì´ ì—†ìœ¼ë©´
             return;
 
-        GameObject nearest = null; // °¡Àå °¡±î¿î³ğ
-        float minDistance = float.MaxValue; // Àû ÃÖ¼Ò°Å¸®(ÀÓÀÇ Å«°ª)
+        GameObject nearest = null; // ê°€ì¥ ê°€ê¹Œìš´ë†ˆ
+        float minDistance = float.MaxValue; // ì  ìµœì†Œê±°ë¦¬(ì„ì˜ í°ê°’)
 
         foreach (GameObject enemy in enemys)
         {
@@ -30,15 +30,15 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
             Vector3 direction = (nearest.transform.position - transform.position).normalized;
             direction.y = 0f;
 
-            transform.rotation = Quaternion.LookRotation(direction); // ½î´Â ¹æÇâº¸°Ô
+            transform.rotation = Quaternion.LookRotation(direction); // ì˜ëŠ” ë°©í–¥ë³´ê²Œ
 
             player.ShootBullet();
         }
     }
 
-    //private TYBulletController bulletController; // ºÒ·¿ÄÁÆ®·Ñ·¯ ÂüÁ¶
-    //private Transform target; // Àû À§Ä¡
-    //[SerializeField] private float searchRadius = 50f; // °ø°İ¹İÀÀ ¹İ°æ
+    //private TYBulletController bulletController; // ë¶ˆë ›ì»¨íŠ¸ë¡¤ëŸ¬ ì°¸ì¡°
+    //private Transform target; // ì  ìœ„ì¹˜
+    //[SerializeField] private float searchRadius = 50f; // ê³µê²©ë°˜ì‘ ë°˜ê²½
     //
     //private void Start()
     //{
@@ -46,9 +46,9 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
     //
     //    FindNearEnemy();
     //    
-    //    if (target != null) // ÀûÀÌ ÀÖÀ¸¸é ±×¹æÇâÀ¸·Î
+    //    if (target != null) // ì ì´ ìˆìœ¼ë©´ ê·¸ë°©í–¥ìœ¼ë¡œ
     //    {
-    //        Vector3 direction = target.position - transform.position; // Àû¹æÇâ
+    //        Vector3 direction = target.position - transform.position; // ì ë°©í–¥
     //
     //        direction.y = 0f;
     //
@@ -56,21 +56,21 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
     //
     //        transform.forward = direction;
     //    }
-    //    //ÀûÀÌ ¾øÀ¸¸é ¿ø·¡´ë·Î ¾ÕÀ¸·Î ¹ß»ç
+    //    //ì ì´ ì—†ìœ¼ë©´ ì›ë˜ëŒ€ë¡œ ì•ìœ¼ë¡œ ë°œì‚¬
     //}
     //
-    ////°¡±î¿îÀû Ã£´Â ÇÔ¼ö
+    ////ê°€ê¹Œìš´ì  ì°¾ëŠ” í•¨ìˆ˜
     //private void FindNearEnemy()
     //{
-    //    GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // ÀûµéÀ» ´ãÀº ¸®½ºÆ®
-    //    float minDistance = float.MaxValue; // Àû°úÀÇ ÃÖ¼Ò°Å¸®¸¦ ¿ì¼± ÀÓÀÇ·Î Å«°ª
-    //    Transform nearest = null; // °¡Àå °¡±î¿î³ğ
+    //    GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // ì ë“¤ì„ ë‹´ì€ ë¦¬ìŠ¤íŠ¸
+    //    float minDistance = float.MaxValue; // ì ê³¼ì˜ ìµœì†Œê±°ë¦¬ë¥¼ ìš°ì„  ì„ì˜ë¡œ í°ê°’
+    //    Transform nearest = null; // ê°€ì¥ ê°€ê¹Œìš´ë†ˆ
     //
     //    foreach (GameObject enemy in enemys)
     //    {
     //        float distance = Vector3.Distance(transform.position, enemy.transform.position);
     //
-    //        //´õ °¡±î¿î³ğÀÌ ÀÖ´ÂÁö
+    //        //ë” ê°€ê¹Œìš´ë†ˆì´ ìˆëŠ”ì§€
     //        if (distance < minDistance && distance <= searchRadius)
     //        {
     //            minDistance = distance;

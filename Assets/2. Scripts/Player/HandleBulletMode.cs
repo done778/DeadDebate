@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +22,8 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
     }
 
     //private TYBulletController bulletController;
-    //[SerializeField] private float maxRayDistance = 100f; // ¸¶¿ì½º °¨Áö °Å¸®
-    //[SerializeField] private LayerMask aimLayerMask; // Æ÷ÀÎÅÍ°¡ ÀÎ½ÄÇÒ ·¹ÀÌ¾î (¸Ê)
+    //[SerializeField] private float maxRayDistance = 100f; // ë§ˆìš°ìŠ¤ ê°ì§€ ê±°ë¦¬
+    //[SerializeField] private LayerMask aimLayerMask; // í¬ì¸í„°ê°€ ì¸ì‹í•  ë ˆì´ì–´ (ë§µ)
     //
     //private void Start()
     //{
@@ -35,27 +35,27 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
     //    ShotBulletDirection();
     //}
     //
-    ////¸¶¿ì½º À§Ä¡¿¡ ½î´Â ÇÔ¼ö
+    ////ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— ì˜ëŠ” í•¨ìˆ˜
     //private void ShotBulletDirection()
     //{
     //    Camera mainCam = Camera.main;
     //
     //    if (mainCam == null)
     //    {
-    //        Debug.Log("¸ŞÀÎÄ«¸Ş¶ó ¾øÀ½");
+    //        Debug.Log("ë©”ì¸ì¹´ë©”ë¼ ì—†ìŒ");
     //        return;
     //    }
     //
-    //    //¸¶¿ì½º À§Ä¡¿¡ Ray¹ß»ç
+    //    //ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— Rayë°œì‚¬
     //    Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
     //    RaycastHit hit;
     //
     //    if (Physics.Raycast(ray, out hit, maxRayDistance, aimLayerMask))
     //    {
-    //        //¸¶¿ì½º°¡ °¡¸®Å°´Â ¹æÇâ
+    //        //ë§ˆìš°ìŠ¤ê°€ ê°€ë¦¬í‚¤ëŠ” ë°©í–¥
     //        Vector3 direction = hit.point - transform.position;
     //
-    //        //¶¥ °üÅë¹æÁö, XZÃàÀ¸·Î¸¸ ÀÏÁ÷¼±À¸·Î ½î°Ô
+    //        //ë•… ê´€í†µë°©ì§€, XZì¶•ìœ¼ë¡œë§Œ ì¼ì§ì„ ìœ¼ë¡œ ì˜ê²Œ
     //        direction.y = 0f;
     //
     //        direction.Normalize();
@@ -64,7 +64,7 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
     //    }
     //    else
     //    {
-    //        //Æ÷ÀÎÅÍ ¾øÀ¸¸é ¿ø·¡´ë·Î ¾ÕÀ¸·Î ¹ß»ç
+    //        //í¬ì¸í„° ì—†ìœ¼ë©´ ì›ë˜ëŒ€ë¡œ ì•ìœ¼ë¡œ ë°œì‚¬
     //    }
     //}
 }

@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //ÇÃ·¹ÀÌ¾î Æ®·£½ºÆû ÁÖÀÔ ÃßÈÄ »èÁ¦ - ±âÁî¸ğ ¿ë
+    //í”Œë ˆì´ì–´ íŠ¸ëœìŠ¤í¼ ì£¼ì… ì¶”í›„ ì‚­ì œ - ê¸°ì¦ˆëª¨ ìš©
     public Transform trs;
 
-    //½ºÅ×ÀÌ¹Ì ¸Å´ÏÀú·Î ¿Å°Ü¾ßÇÔ
+    //ìŠ¤í…Œì´ë¯¸ ë§¤ë‹ˆì €ë¡œ ì˜®ê²¨ì•¼í•¨
     public Transform bossTrs;
 
     public float maxRadius;
@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Initialize()
     {
-        //ÃÊ±â ¼¼ÆÃ ÇÁ¸®ÆÕ¸®½ºÆ®¸¦ µñ¼Å³Ê¸®·Î º¯°æ
+        //ì´ˆê¸° ì„¸íŒ… í”„ë¦¬íŒ¹ë¦¬ìŠ¤íŠ¸ë¥¼ ë”•ì…”ë„ˆë¦¬ë¡œ ë³€ê²½
         foreach (var enemy in setEnemys)
         {
             EnemyData data = enemy.GetComponent<EnemyController>().data;
@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    //½ºÅ×ÀÌÁö¸Å´ÏÀú¿¡¼­ È£Ãâ~
+    //ìŠ¤í…Œì´ì§€ë§¤ë‹ˆì €ì—ì„œ í˜¸ì¶œ~
     public void DoSpawnedEnemy()
     {
         spawnCoroutine = StartCoroutine(EnemySpawn());
@@ -66,15 +66,15 @@ public class EnemySpawner : MonoBehaviour
     {
         while (GameManager.Instance.Playing)
         {
-            //·£´ı À§Ä¡ °ª¿¡¼­ ÇÃ·¹ÀÌ¾î Áß½É¿¡¼­ À§Ä¡°¡ Á¤ÇØÁöµµ·Ï
+            //ëœë¤ ìœ„ì¹˜ ê°’ì—ì„œ í”Œë ˆì´ì–´ ì¤‘ì‹¬ì—ì„œ ìœ„ì¹˜ê°€ ì •í•´ì§€ë„ë¡
             createdPos = GetSpawnOffset() + GameManager.Instance.player.transform.position;
 
             //curEnemy = Instantiate(prefabs[ENEMY_TYPE.Normal], createdPos, Quaternion.identity);
             int randomCreate = Random.Range(0, 10) + 1;
 
-            //todo : Å×½ºÆ®¿ë ¸®ÆÑÅä¸µ ¿ä¸Á
-            if (randomCreate < 8) randomCreate = 0;//±ÙÁ¢
-            else randomCreate = 1;//¿ø°Å¸®
+            //todo : í…ŒìŠ¤íŠ¸ìš© ë¦¬íŒ©í† ë§ ìš”ë§
+            if (randomCreate < 8) randomCreate = 0;//ê·¼ì ‘
+            else randomCreate = 1;//ì›ê±°ë¦¬
 
             curEnemy = Instantiate(setEnemys[randomCreate], createdPos, Quaternion.identity);
             curEnemy.GetComponent<EnemyController>().Init(GameManager.Instance.player);
@@ -87,10 +87,10 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator BossSpawn()
     {
-        //º¸½º µîÀå Àü Ã³¸®ÇÒ ·ÎÁ÷µé--------
-        //yield return WaitUntil(À§¿¡ ·ÎÁ÷ÀÌ ´Ù µÉ µ¿¾È ±â´Ù·Á)
+        //ë³´ìŠ¤ ë“±ì¥ ì „ ì²˜ë¦¬í•  ë¡œì§ë“¤--------
+        //yield return WaitUntil(ìœ„ì— ë¡œì§ì´ ë‹¤ ë  ë™ì•ˆ ê¸°ë‹¤ë ¤)
 
-        //3ºĞÈÄ »ı¼º
+        //3ë¶„í›„ ìƒì„±
         yield return new WaitForSeconds(400f);
         GameObject boss = Instantiate(prefabs[ENEMY_TYPE.Normal], bossTrs);
         boss.GetComponent<EnemyController>().Init(GameManager.Instance.player, 3, true);

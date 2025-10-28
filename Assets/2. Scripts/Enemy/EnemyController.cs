@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor;
@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;
     public Transform muzzle;
 
-    //½ÇÁ¦ ¼öÄ¡µé
+    //ì‹¤ì œ ìˆ˜ì¹˜ë“¤
     private EnemyData currentStat;
     public EnemyData CurrentStat => currentStat;
 

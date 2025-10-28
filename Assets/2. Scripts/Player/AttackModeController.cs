@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackModeController : MonoBehaviour
 {
-    private IAttackMode currentMode; // ÇöÀç °ø°İ¸ğµå
-    private AutoBulletMode autoMode; // ÀÚµ¿°ø°İ
-    private HandleBulletMode handleMode; // Á¶ÀÛ°ø°İ
+    private IAttackMode currentMode; // í˜„ì¬ ê³µê²©ëª¨ë“œ
+    private AutoBulletMode autoMode; // ìë™ê³µê²©
+    private HandleBulletMode handleMode; // ì¡°ì‘ê³µê²©
 
     private void Start()
     {
@@ -14,7 +14,7 @@ public class AttackModeController : MonoBehaviour
         handleMode = gameObject.AddComponent<HandleBulletMode>();
         
         handleMode.enabled = false;
-        currentMode = autoMode; // ±âº» ÀÚµ¿°ø°İ
+        currentMode = autoMode; // ê¸°ë³¸ ìë™ê³µê²©
     }
 
     public IAttackMode GetCurrentMode() => currentMode;

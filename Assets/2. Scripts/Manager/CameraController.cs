@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        // Ä«¸Ş¶ó ÃÊ±âÈ­
+        // ì¹´ë©”ë¼ ì´ˆê¸°í™”
         mainCamera = Camera.main;
         mainCamera.transform.rotation = Quaternion.Euler(80f, 0f, 0f);
     }
@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     {
         if (GameManager.Instance.Playing == true)
         {
-            //Ä«¸Ş¶ó°¡ ÇÃ·¹ÀÌ¾î¸¦ µû¶ó °¡µµ·Ï ÇÔ. 20°ú -4´Â ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸® »ó¼ö
+            //ì¹´ë©”ë¼ê°€ í”Œë ˆì´ì–´ë¥¼ ë”°ë¼ ê°€ë„ë¡ í•¨. 20ê³¼ -4ëŠ” í”Œë ˆì´ì–´ì™€ì˜ ê±°ë¦¬ ìƒìˆ˜
             cameraPos.x = player.transform.position.x;
             cameraPos.y = player.transform.position.y + 20;
             cameraPos.z = player.transform.position.z - 4;
