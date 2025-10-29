@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoBulletMode : MonoBehaviour, IAttackMode
 {
-    public void Attack(PlayerContoller player)
+    public void Attack(PlayerController player)
     {
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // 적들을 담은 리스트
 

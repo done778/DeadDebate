@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager UIInstance { get; private set; }
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
-    private PlayerContoller curPlayer;
+    private PlayerController curPlayer;
     private PlayerStatButton onClickDetected;
     private Button lobbyButton;
     bool isLoading;
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     // Stage 씬 진입 시 UI 매니저 초기화
     public void GameStart()
     {
-        curPlayer = GameObject.FindWithTag("Player").GetComponent<PlayerContoller>();
+        curPlayer = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         gameoverPanel = GameObject.Find("GameOverUI");
         levelUpPanel = GameObject.Find("LevelUpUI");
         onClickDetected = GameObject.Find("OnClickEvent").GetComponent<PlayerStatButton>();
