@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.PlasticSCM.Editor.WebApi;
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     private bool isAttack = true;
     private WaitForSeconds attackDelay;
 
-    private PlayerContoller target;
+    private PlayerController target;
 
     public event Action OnDeath;
     #endregion
@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
     #region method
     public void Init(GameObject player, bool isBoss = false)
     {
-        target = player.GetComponent<PlayerContoller>();
+        target = player.GetComponent<PlayerController>();
         attackDelay = new WaitForSeconds(currentStat.attackSpeed);
 
         currentStat = data.GetCopy();
@@ -75,7 +75,7 @@ public class EnemyController : MonoBehaviour
 
     public void Init(GameObject player, int changeValue, bool isBoss = false)
     {
-        target = player.GetComponent<PlayerContoller>();
+        target = player.GetComponent<PlayerController>();
 
         currentStat.healthPoint = Mathf.RoundToInt(data.healthPoint * changeValue);
         currentStat.attakPower = Mathf.RoundToInt(data.attakPower * changeValue);
@@ -164,7 +164,7 @@ public class EnemyController : MonoBehaviour
         OnDeath.Invoke();
         OnDeath = null;
 
-        target.GetComponent<PlayerContoller>().GetExp(currentStat.exp);
+        target.GetComponent<PlayerController>().GetExp(currentStat.exp);
         EnemyPool.Instance.ReturnEnemy(gameObject);
     }
     #endregion

@@ -13,8 +13,10 @@ public class LevelUpUIController : MonoBehaviour
 
     private void OnEnable()
     {
+       
         // 활성화가 되면 우선 스탯 중 랜덤 3개를 가져온다.
         RandomSelectThree();
+      
 
         // 자식 버튼 가져오기.
         childButton = transform.GetComponentsInChildren<Button>();
@@ -39,7 +41,7 @@ public class LevelUpUIController : MonoBehaviour
             bool alreadyExist = false;
             int selected = Random.Range(0, stats.Length); // 0, 4 니까 0 ~ 3
             for (int i = 0; i < index; i++) {
-                if (selectedStats[index] == stats[selected])
+                if (selectedStats[i] == stats[selected])
                 {
                     alreadyExist = true;
                     break;

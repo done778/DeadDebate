@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandleBulletMode : MonoBehaviour, IAttackMode
 {
-    public void Attack(PlayerContoller player)
+    public void Attack(PlayerController player)
     {
         Plane plane = new Plane(Vector3.up, transform.position);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
