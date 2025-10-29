@@ -167,6 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   attackCoolTime: 0.3
+  attackPower: 1
+  maxHp: 5
+  attackRange: 10
   bullet: {fileID: 1993661690687772491, guid: ede407c9bab482a49a4303fec00e1295, type: 3}
 --- !u!136 &7539272864255276304
 CapsuleCollider:

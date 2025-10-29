@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 10f; // 이동속도
     public float attackCoolTime = 0.3f; // 공격속도
     public float attackPower = 1f; // 공격력
-
     [SerializeField] private int maxHp = 5; // 최대 체력
     private int currentHp = 0; // 현재 체력
+    [SerializeField] private float attackRange = 10f; // 공격사거리
+    public float AttackRange => attackRange;
+
 
     public GameObject bullet;
     private Renderer rend;
