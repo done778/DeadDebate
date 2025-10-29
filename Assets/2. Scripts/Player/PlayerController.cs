@@ -6,8 +6,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     const int MUZZLE_INDEX = 1;
-    public float moveSpeed; // 이동속도
-    public float attackCoolTime; // 공격속도
+
+    //플레이어 스탯
+    public float moveSpeed = 10f; // 이동속도
+    public float attackCoolTime = 0.3f; // 공격속도
+    public float attackPower = 1f; // 공격력
+
+    [SerializeField] private int maxHp = 5; // 최대 체력
+    private int currentHp = 0; // 현재 체력
+
     public GameObject bullet;
     private Renderer rend;
     private Vector3 muzzle;
@@ -15,10 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private int experience; // 경험치
     private int expRequired; // 필요 경험치
-    private int level; // 레벨
-
-    private int maxHp = 5; // 최대 체력
-    private int currentHp = 0; // 현재 체력
+    private int level; // 레벨    
 
     private bool isInvincibilityl; // 무적
 
@@ -105,6 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         rend.material.color = Color.blue;
         StartCoroutine(TakeDamage());
+        Debug.Log($"현재체력: {currentHp}");
     }
 
     private void Move(Vector3 direction)
@@ -131,6 +136,35 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
         
         OnLevelUp?.Invoke(level); // 레벨업시
+    }
+
+    //스탯 증가
+    public void IncreaseStat(string statType)
+    {
+        switch (statType)
+        {
+            case "AttackPower":
+                attackPower += 1f;
+                Debug.Log($"공격력 증가!! 현재 공격력: {attackPower}");
+                break;
+            case "AttackSpeed":
+                attackCoolTime = Mathf.Max(0.1f, attackCoolTime - 0.1f);
+                Debug.Log($"공격속도 증가!! 현재 공격속도: {attackCoolTime}");
+                break;
+            case "HealthPoint":
+                maxHp += 1;
+                OnHpChanged?.Invoke(currentHp, maxHp);
+                Debug.Log($"최대체력 증가!! 현재 최대체력: {maxHp}");
+                break;
+            case "MoveSpeed":
+                moveSpeed += 0.5f;
+                Debug.Log($"이동속도 증가!! 현재 이동속도: {moveSpeed}");
+                break;
+
+            default:
+                Debug.Log($"알 수 없는 스탯: {statType}");
+                break;
+        }
     }
     
     public void ShootBullet()
