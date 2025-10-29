@@ -36,7 +36,7 @@ public class BulletPool : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab);
         bullet.SetActive(false);
-        bullet.transform.SetParent(transform);
+        bullet.transform.SetParent(null); // 부모가 없어야 갈길감
 
         return bullet;
     }
