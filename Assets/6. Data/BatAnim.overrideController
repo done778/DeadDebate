@@ -7,5 +7,13 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BatAnim
-  m_Controller: {fileID: 9100000, guid: d6eff57b98fbfe44e98e829383d7def0, type: 2}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 3fa855dca75c26240a8b0f9d9f12b893, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400004, guid: e607f74860c67814e93c914b710142d5, type: 3}
+    m_OverrideClip: {fileID: 7400004, guid: 59afa1f2c595d6343b15e945602e1f8f, type: 3}
+  - m_OriginalClip: {fileID: 7400006, guid: e607f74860c67814e93c914b710142d5, type: 3}
+    m_OverrideClip: {fileID: 7400008, guid: 59afa1f2c595d6343b15e945602e1f8f, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: e607f74860c67814e93c914b710142d5, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 59afa1f2c595d6343b15e945602e1f8f, type: 3}
+  - m_OriginalClip: {fileID: 7400002, guid: e607f74860c67814e93c914b710142d5, type: 3}
+    m_OverrideClip: {fileID: 7400002, guid: 59afa1f2c595d6343b15e945602e1f8f, type: 3}

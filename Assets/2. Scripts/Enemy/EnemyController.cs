@@ -160,11 +160,6 @@ public class EnemyController : MonoBehaviour
         isAttack = false;
         anim.SetTrigger("Attack");
 
-        //attackBehaviour.Execute(transform, target, currentStat.attakPower, bullet, muzzle);
-
-        float len = anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        attackTime = len;
-
         if (attackCoroutine != null) StopCoroutine(attackCoroutine);
         attackCoroutine = StartCoroutine(AttackDelay());
     }
