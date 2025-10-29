@@ -15,7 +15,9 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
 
         Vector3 target = ray.GetPoint(distance);
         Vector3 direction = (target - transform.position).normalized;
-        direction.y = 0f; // 높이고정
+
+        //direction.y = 0f; // 높이고정
+
         transform.rotation = Quaternion.LookRotation(direction); // 마우스방향 보기
 
         //공격사거리 안에 적이 있는지
