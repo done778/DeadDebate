@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     
     public GameObject player;
     private PlayerContoller curPlayer;
+    private TimeManager timeManager;
+    private PrefabManager prefabManager;
 
-    public readonly float surviveTime = 180f;
     private float playingTime;
 
     public Action OnGameStart; // 게임 시작 이벤트
@@ -21,15 +22,16 @@ public class GameManager : MonoBehaviour
     public event Action OnStageFailed; // 스테이지 클리어 실패 이벤트
 
     // 한결님 UI 업데이트 메서드를 여기에 구독하세요.
-    public event Action OnTimerUpdate; // 1초마다 타이머 이벤트
+    public Action OnTimerUpdate; // 1초마다 타이머 이벤트
     public Action OnKillCount; // 적 처치 시 이벤트 (적 관리 쪽으로)
     // public event Action OnPlayerHpChange; // 플레이어 HP 변동 이벤트 (이거 플레이어 쪽으로)
 
     private Coroutine timerUpdate;
 
     public bool Playing { get; private set; }
+    public int SurviveTime { get; private set; }
 
-    WaitForSeconds playTimer = new WaitForSeconds(1f);
+    
 
     // 싱글톤
     void Awake()
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoad;
         OnGameStart = GameStart;
         OnGameOver = GameOver;
+        SurviveTime = 180;
         Playing = false;
     }
 
@@ -73,8 +76,8 @@ public class GameManager : MonoBehaviour
         // 레벨 업 시 스탯 선택지 버튼을 클릭하면 게임을 재개한다.
         UIManager.UIInstance.CloseUIPanel += PlayGame;
 
-        // 1초마다 OnTimerUpdate 인보크 발생시키는 코루틴 시작
-        timerUpdate = StartCoroutine(PlayingTimer());
+        timeManager.Init();
+        timeManager.timeOver += StageClear;
 
         PlayGame();
     }
@@ -83,8 +86,7 @@ public class GameManager : MonoBehaviour
     private void GameOver(bool isClear)
     {
         Playing = false;
-        // 코루틴 멈추고, 구독한 이벤트 모두 해제하고 일시정지
-        StopCoroutine(timerUpdate);
+        // 구독한 이벤트 모두 해제하고 일시정지
         curPlayer.OnPlayerDie -= StageFailed;
         curPlayer.OnLevelUp -= (int temp) => PauseGame();
         UIManager.UIInstance.CloseUIPanel -= PlayGame;
@@ -114,14 +116,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    // 플레이어가 살아있는 동안 플레이타임 측정 코루틴
-    IEnumerator PlayingTimer()
+    public void RegistTimeManager(TimeManager manager)
     {
-        while (Playing)
-        {
-            OnTimerUpdate?.Invoke();
-            yield return playTimer;
-        }
+        timeManager = manager;
+    }
+
+    public void RegistPrefabManager(PrefabManager manager)
+    {
+        prefabManager = manager;
     }
 
     // Stage 씬 진입을 감지함
