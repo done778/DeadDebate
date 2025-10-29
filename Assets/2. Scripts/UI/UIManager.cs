@@ -9,8 +9,6 @@ public class UIManager : MonoBehaviour
     public static UIManager UIInstance { get; private set; }
 
     // 로비 씬 관련 변수
-    private GameObject characterSelectPanel;
-    private Button characterButton;
     private GameObject charSelectPanel;
 
     // 스테이지 씬 관련 변수
@@ -49,14 +47,7 @@ public class UIManager : MonoBehaviour
 
     public void EnterLobby()
     {
-        //characterButton = GameObject.Find("CharacterButton")?.GetComponent<Button>();
-        //characterButton.onClick.AddListener(OpenCharacterSelectPanel);
-        //onClickDetected.OnButtonClicked += (string statType) =>
-        //{
-        //    curPlayer.IncreaseStat(statType);
-        //    CloseSelectPanel();
-        //};
-        charSelectPanel.SetActive(false);
+        charSelectPanel?.SetActive(false);
     }
 
     public void GameStart()
@@ -97,14 +88,14 @@ public class UIManager : MonoBehaviour
         levelUpPanel.SetActive(false);
     }
 
-    public void OpenCharacterSelectPanel()
+    public void OpenCharSelectPanel()
     {
-        characterSelectPanel.SetActive(true);
+        charSelectPanel.SetActive(true);
     }
 
-    public void CloseCharacterSelectPanel()
+    public void CloseCharSelectPanel()
     {
-        characterSelectPanel.SetActive(false);
+        charSelectPanel.SetActive(false);
     }
     public void GoToLobby()
     {
@@ -113,7 +104,6 @@ public class UIManager : MonoBehaviour
         onClickDetected.OnButtonClicked -= (string temp) => CloseSelectPanel();
         LoadScene("Lobby");
     }
-
 
     public void RegistCharSelectPanel(GameObject controller)
     {

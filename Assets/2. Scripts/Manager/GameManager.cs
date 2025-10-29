@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public bool Playing { get; private set; }
     public int SurviveTime { get; private set; }
+    public int SelectedPlayerType { get; private set; }
 
     
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         OnGameStart = GameStart;
         OnGameOver = GameOver;
         SurviveTime = 180;
+        SelectedPlayerType = 0;
         Playing = false;
     }
 
@@ -136,6 +138,11 @@ public class GameManager : MonoBehaviour
             Debug.Log($"{name} 프리팹을 찾지 못했습니다.");
         }
         return prefab;
+    }
+
+    public void SetPlayerCharacter(int index)
+    {
+        SelectedPlayerType = index;
     }
 
     // Stage 씬 진입을 감지함
