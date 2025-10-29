@@ -1,7 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyPool : MonoBehaviour
 {
@@ -9,9 +10,14 @@ public class EnemyPool : MonoBehaviour
 
     [Header("Enemy Setting")]
     public List<GameObject> prefabs = new List<GameObject>();
+    //타입 당 미리 생성될 적의 마리수
     public int count = 50;
 
     private Dictionary<ENEMY_TYPE, Queue<GameObject>> pool = new Dictionary<ENEMY_TYPE, Queue<GameObject>>();
+    //현재까지 생성된 적들 리스트
+    private List<EnemyController> enemies = new List<EnemyController>();
+    //적이 죽었을 때의 이벤트
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -48,6 +54,17 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
+    //현재까지 생성된 에너미 정보들
+    public List<EnemyController> GetEnemies()
+    {
+        if (enemies.Count == 0)
+        {
+            Debug.LogError("생성된 적이 없습니다.");
+        }
+
+        return enemies;
+    }
+
     public EnemyController GetEnemy(ENEMY_TYPE type, Vector3 pos)
     {
         EnemyController enemy = null;
@@ -66,6 +83,8 @@ public class EnemyPool : MonoBehaviour
                 enemy.transform.position = pos;
                 //회전값이 필요하려나
                 //enemy.transform.rotation = ???
+
+                enemies.Add(enemy);
             }
             else
             {
@@ -79,8 +98,12 @@ public class EnemyPool : MonoBehaviour
 
     public void ReturnEnemy(GameObject enemy)
     {
-        EnemyData data = enemy.GetComponent<EnemyController>().data;
+        EnemyController controller = enemy.GetComponent<EnemyController>();
+
+        OnDeath?.Invoke();
+
         enemy.SetActive(false);
-        pool[data.enemyType].Enqueue(enemy);
+        enemies.Remove(controller);
+        pool[controller.data.enemyType].Enqueue(enemy);
     }
 }
