@@ -6,7 +6,7 @@ public class RangedAttack : MonoBehaviour, IAttackBehaviour
 {
     public void Execute(
         Transform enemyTransform,
-        PlayerContoller target,
+        PlayerController target,
         int attackPower,
         GameObject projectilePrefab = null,
         Transform muzzle = null)

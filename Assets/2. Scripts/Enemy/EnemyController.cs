@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour
     private Coroutine attackCoroutine;
 
     private IAttackBehaviour attackBehaviour;
-    private PlayerContoller target;
+    private PlayerController target;
 
     public event Action OnDeath;
     #endregion
@@ -109,7 +109,7 @@ public class EnemyController : MonoBehaviour
             currentStat.exp = Mathf.RoundToInt(data.exp * changeValue);
         }
 
-        target = player.GetComponent<PlayerContoller>();
+        target = player.GetComponent<PlayerController>();
         AddAttakType();
 
 
