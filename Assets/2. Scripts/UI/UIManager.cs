@@ -12,11 +12,11 @@ public class UIManager : MonoBehaviour
     private GameObject charSelectPanel;
 
     // 스테이지 씬 관련 변수
+    private GameObject stageClearPanel;
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
     private PlayerController curPlayer;
     private PlayerStatButton onClickDetected;
-    private Button lobbyButton;
 
 
     bool isLoading;
@@ -53,14 +53,14 @@ public class UIManager : MonoBehaviour
     public void GameStart()
     {
         curPlayer = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        stageClearPanel = GameObject.Find("StageClearUI");
         gameoverPanel = GameObject.Find("GameOverUI");
         levelUpPanel = GameObject.Find("LevelUpUI");
         onClickDetected = GameObject.Find("OnClickEvent").GetComponent<PlayerStatButton>();
-        lobbyButton = gameoverPanel.transform.GetChild(0).GetComponent<Button>();
-        lobbyButton.onClick.AddListener(GoToLobby);
 
         gameoverPanel.SetActive(false);
         levelUpPanel.SetActive(false);
+        stageClearPanel.SetActive(false);
 
         curPlayer.OnPlayerDie += OpenGameoverPanel;
         curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();

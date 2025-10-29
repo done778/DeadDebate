@@ -6,7 +6,6 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     // 플레이 타임 측정을 담당한다.
-
     private float remainTime;
     public event Action timeOver;
 
