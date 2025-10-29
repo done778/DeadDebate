@@ -23,7 +23,7 @@ public class AttackModeController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (currentMode == autoMode)
+            if ((object)currentMode == (object)autoMode)
             {
                 currentMode = handleMode;
                 autoMode.enabled = false;
