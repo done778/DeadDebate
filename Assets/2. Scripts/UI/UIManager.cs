@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     private PlayerStatButton onClickDetected;
     private Button lobbyButton;
     bool isLoading;
+    private GameObject characterSelectPanel;
+    private Button characterButton;
 
     public event Action CloseUIPanel;
 
@@ -38,7 +40,6 @@ public class UIManager : MonoBehaviour
         isLoading = false;
     }
 
-    // Stage 씬 진입 시 UI 매니저 초기화
     public void GameStart()
     {
         curPlayer = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -48,16 +49,22 @@ public class UIManager : MonoBehaviour
         lobbyButton = gameoverPanel.transform.GetChild(0).GetComponent<Button>();
         lobbyButton.onClick.AddListener(GoToLobby);
 
+        characterSelectPanel = GameObject.Find("CharacterSelectionUI");
+        characterButton = GameObject.Find("CharacterButton")?.GetComponent<Button>();
+
+        characterSelectPanel.SetActive(false);
         gameoverPanel.SetActive(false);
         levelUpPanel.SetActive(false);
 
+        characterButton.onClick.AddListener(OpenCharacterSelectPanel);
+
+
+
         curPlayer.OnPlayerDie += OpenGameoverPanel;
         curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();
-        // 선택지에서 버튼 클릭시 패널을 비활성화하는 이벤트에 구독.
         onClickDetected.OnButtonClicked += (string temp) => CloseSelectPanel(); 
     }
 
-    // 게임 종료 패널, 선택지 패널 활성화 및 비활성화
     public void OpenGameoverPanel()
     {
         gameoverPanel.SetActive(true);
@@ -79,6 +86,15 @@ public class UIManager : MonoBehaviour
         levelUpPanel.SetActive(false);
     }
 
+    public void OpenCharacterSelectPanel()
+    {
+        characterSelectPanel.SetActive(true);
+    }
+
+    public void CloseCharacterSelectPanel()
+    {
+        characterSelectPanel.SetActive(false);
+    }
     public void GoToLobby()
     {
         curPlayer.OnPlayerDie -= OpenGameoverPanel;
@@ -87,7 +103,6 @@ public class UIManager : MonoBehaviour
         LoadScene("Lobby");
     }
 
-    // Stage 씬 진입을 감지함
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Stage")
