@@ -121,11 +121,11 @@ public class EnemySpawner : MonoBehaviour
         currentEnemyCount--;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(player.position, spawnRadius);
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(player.position, spawnRadius);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(player.position, exclusionRadius);
-    }
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(player.position, exclusionRadius);
+    //}
 }
