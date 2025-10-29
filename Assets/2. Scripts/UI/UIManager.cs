@@ -68,6 +68,7 @@ public class UIManager : MonoBehaviour
 
         curPlayer.OnPlayerDie += OpenGameoverPanel;
         curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();
+        onClickDetected.OnButtonClicked += (string temp) => CloseSelectPanel();
     }
 
     public void OpenGameoverPanel()
