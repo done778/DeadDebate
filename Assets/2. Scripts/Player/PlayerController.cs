@@ -171,6 +171,8 @@ public class PlayerController : MonoBehaviour
     public void ShootBullet()
     {
         muzzle = transform.GetChild(MUZZLE_INDEX).GetComponent<Transform>().position;
-        Instantiate(bullet, muzzle, transform.rotation);
+        //Instantiate(bullet, muzzle, transform.rotation);
+
+        GameObject bulletObject = BulletPool.Instance.GetBullet(muzzle, transform.rotation);
     }
 }
