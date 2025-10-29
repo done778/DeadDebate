@@ -39,8 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         attackModeController = GetComponent<AttackModeController>(); // 공격모드
 
-        rend = transform.GetChild(0).GetComponent<Renderer>();
-        GameManager.Instance.GameStart();
+        rend = transform.GetChild(0).GetComponent<Renderer>();        
 
         level = 1;
         expRequired = 3;
