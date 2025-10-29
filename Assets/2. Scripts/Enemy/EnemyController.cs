@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,14 +12,30 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;
     public Transform muzzle;
 
+    private Animator anim;
+    private Collider col;
+
     //실제 수치들
     private EnemyData currentStat;
     public EnemyData CurrentStat => currentStat;
 
     private bool isBoss = false;
     private bool isAttack = true;
-    private WaitForSeconds attackDelay;
+    private bool isDie = false;
+    private float attackTime;
+    public bool IsDie
+    {
+        get { return isDie; }
+        private set
+        {
+            isDie = value;
+        }
+    }
 
+    private WaitForSeconds attackDelay;
+    private Coroutine attackCoroutine;
+
+    private IAttackBehaviour attackBehaviour;
     private PlayerController target;
 
     public event Action OnDeath;
@@ -27,11 +43,22 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        col = GetComponent<Collider>();
+        anim = GetComponent<Animator>();
+
         currentStat = data.GetCopy();
+    }
+    private void OnEnable()
+    {
+        isDie = false;
+        isAttack = true;
+        col.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isDie) return;
+
         if (other.gameObject.CompareTag("Bullet"))
         {
             int damage = other.gameObject.GetComponent<BulletController>().damage;
@@ -42,12 +69,16 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Instance.Playing)
+        if (GameManager.Instance.Playing && !isDie)
         {
-            transform.LookAt(target.transform);
-
-            if (!IsTagetInRange() && isAttack)
+            if (isAttack)
             {
+                transform.LookAt(target.transform);
+            }
+
+            if (!IsTagetInRange())
+            {
+
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     target.transform.position,
@@ -59,99 +90,111 @@ public class EnemyController : MonoBehaviour
             {
                 Attack();
             }
+
         }
 
     }
 
     #region method
-    public void Init(GameObject player, bool isBoss = false)
+    public void Init(GameObject player, int changeValue = 1, bool isBoss = false)
     {
-        target = player.GetComponent<PlayerController>();
-        attackDelay = new WaitForSeconds(currentStat.attackSpeed);
 
         currentStat = data.GetCopy();
-        this.isBoss = isBoss;
-    }
+        if (changeValue != 1)
+        {
+            currentStat.healthPoint = Mathf.RoundToInt(data.healthPoint * changeValue);
+            currentStat.attakPower = Mathf.RoundToInt(data.attakPower * changeValue);
+            currentStat.moveSpeed *= changeValue;
+            currentStat.attackSpeed *= changeValue;
+            currentStat.exp = Mathf.RoundToInt(data.exp * changeValue);
+        }
 
-    public void Init(GameObject player, int changeValue, bool isBoss = false)
-    {
         target = player.GetComponent<PlayerController>();
+        AddAttakType();
 
-        currentStat.healthPoint = Mathf.RoundToInt(data.healthPoint * changeValue);
-        currentStat.attakPower = Mathf.RoundToInt(data.attakPower * changeValue);
-        currentStat.moveSpeed *= changeValue;
-        currentStat.attackSpeed *= changeValue;
-        currentStat.exp = Mathf.RoundToInt(data.exp * changeValue);
+
         attackDelay = new WaitForSeconds(currentStat.attackSpeed);
-
         this.isBoss = isBoss;
     }
 
     private void TakeDamage(int dmg)
     {
+        if (isDie) return;
+
         currentStat.healthPoint -= dmg;
+
         if (currentStat.healthPoint <= 0)
         {
             Die();
         }
     }
 
+    private void AddAttakType()
+    {
+        if (GetComponent<IAttackBehaviour>() == null)
+        {
+            switch (currentStat.attackType)
+            {
+                case ATTAK_TYPE.None:
+                    break;
+                case ATTAK_TYPE.Melee:
+                    transform.AddComponent<MeleeAttack>();
+                    break;
+                case ATTAK_TYPE.Ranged:
+                    transform.AddComponent<RangedAttack>();
+                    break;
+                case ATTAK_TYPE.Hybrid:
+                    break;
+                default:
+                    break;
+            }
+        }
+        attackBehaviour = GetComponent<IAttackBehaviour>();
+    }
 
     #region Attack Type
     private void Attack()
     {
         if (!isAttack) return;
 
-        switch (currentStat.attackType)
-        {
-            case ATTAK_TYPE.None:
-                break;
-            case ATTAK_TYPE.Melee:
-                MeleeAttack();
-                break;
-            case ATTAK_TYPE.Ranged:
-                RangedAttack();
-                break;
-            case ATTAK_TYPE.Hybrid:
-                //HybridAttack();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void MeleeAttack()
-    {
-        StartCoroutine(AttackDelay(true));
-    }
-    private void RangedAttack()
-    {
-        SpawnProjectile();
-
-        StartCoroutine(AttackDelay(false));
-    }
-
-    private void SpawnProjectile()
-    {
-        GameObject newBullet = Instantiate(bullet, muzzle);
-        newBullet.transform.SetParent(null);
-    }
-
-    IEnumerator AttackDelay(bool isMelee)
-    {
         isAttack = false;
+        anim.SetTrigger("Attack");
 
-        if (isMelee)
-        {
-            target.TakeDamage(currentStat.attakPower);
-        }
+        //attackBehaviour.Execute(transform, target, currentStat.attakPower, bullet, muzzle);
 
-        yield return attackDelay;
+        float len = anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        attackTime = len;
+
+        if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+        attackCoroutine = StartCoroutine(AttackDelay());
+    }
+
+    IEnumerator AttackDelay()
+    {
+        //todo : EnemyData에 공격시점 추가할지말지
+        yield return new WaitForSeconds(0.3f);
+        attackBehaviour.Execute(transform, target, currentStat.attakPower, bullet, muzzle);
+        //yield return attackDelay;
+        yield return new WaitForSeconds(currentStat.attackSpeed - 0.3f);
+
+
         isAttack = true;
+    }
+
+    IEnumerator RetrunDelay(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        OnDeath = null;
+        attackCoroutine = null;
+
+        EnemyPool.Instance.ReturnEnemy(gameObject);
     }
 
     private bool IsTagetInRange()
     {
+        if (target == null) return false;
+
         float distance = (target.transform.position - transform.position).sqrMagnitude;
 
         return distance <= currentStat.range * currentStat.range;
@@ -161,11 +204,14 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        OnDeath.Invoke();
-        OnDeath = null;
+        isDie = true;
 
-        target.GetComponent<PlayerController>().GetExp(currentStat.exp);
-        EnemyPool.Instance.ReturnEnemy(gameObject);
+        OnDeath?.Invoke();
+        anim.SetTrigger("Die");
+        col.enabled = false;
+
+        target.GetExp(currentStat.exp);
+        StartCoroutine(RetrunDelay(4f));
     }
     #endregion
 }
