@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager UIInstance { get; private set; }
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
+    private GameObject charSelectPanel;
     private PlayerController curPlayer;
     private PlayerStatButton onClickDetected;
     private Button lobbyButton;
@@ -40,6 +41,19 @@ public class UIManager : MonoBehaviour
         isLoading = false;
     }
 
+    public void EnterLobby()
+    {
+        characterButton = GameObject.Find("CharacterButton")?.GetComponent<Button>();
+        charSelectPanel = GameObject.Find("CharacterSelectionUI");
+        characterButton.onClick.AddListener(OpenCharacterSelectPanel);
+        //onClickDetected.OnButtonClicked += (string statType) =>
+        //{
+        //    curPlayer.IncreaseStat(statType);
+        //    CloseSelectPanel();
+        //};
+        charSelectPanel.SetActive(false);
+    }
+
     public void GameStart()
     {
         curPlayer = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -49,24 +63,11 @@ public class UIManager : MonoBehaviour
         lobbyButton = gameoverPanel.transform.GetChild(0).GetComponent<Button>();
         lobbyButton.onClick.AddListener(GoToLobby);
 
-        characterSelectPanel = GameObject.Find("CharacterSelectionUI");
-        characterButton = GameObject.Find("CharacterButton")?.GetComponent<Button>();
-
-        characterSelectPanel.SetActive(false);
         gameoverPanel.SetActive(false);
         levelUpPanel.SetActive(false);
 
-        characterButton.onClick.AddListener(OpenCharacterSelectPanel);
-
-
-
         curPlayer.OnPlayerDie += OpenGameoverPanel;
         curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();
-        onClickDetected.OnButtonClicked += (string statType) =>
-        {
-            curPlayer.IncreaseStat(statType);
-            CloseSelectPanel();
-        };
     }
 
     public void OpenGameoverPanel()
@@ -112,6 +113,10 @@ public class UIManager : MonoBehaviour
         if (scene.name == "Stage")
         {
             GameStart();
+        }
+        if (scene.name == "Lobby")
+        {
+            EnterLobby();
         }
     }
 }
