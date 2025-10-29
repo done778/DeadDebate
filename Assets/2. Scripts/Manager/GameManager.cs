@@ -116,14 +116,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    // 매니저 쪽에서 이 메서드를 통해 자신을 등록하도록 함.
+    // 기존의 게임매니저가 모든 오브젝트 순회하며 찾는 것보다 훨씬 효율적.
     public void RegistTimeManager(TimeManager manager)
     {
         timeManager = manager;
     }
-
     public void RegistPrefabManager(PrefabManager manager)
     {
         prefabManager = manager;
+    }
+
+    // 다른 매니저에서 프리팹을 가져갈 수 있게 함. (딕셔너리)
+    public GameObject GetPrefab(string name)
+    {
+        GameObject prefab = prefabManager.GetPrefabFromKey(name);
+        if (prefab == null) 
+        {
+            Debug.Log($"{name} 프리팹을 찾지 못했습니다.");
+        }
+        return prefab;
     }
 
     // Stage 씬 진입을 감지함

@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class PrefabManager : MonoBehaviour
 {
-    public List<GameObject> prefabs;
+    [SerializeField] private List<GameObject> prefabs;
+
+    private Dictionary<string, GameObject> dictPrefabs = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
         GameManager.Instance.RegistPrefabManager(this);
-    }
-    void Start()
-    {
-        
+        foreach (GameObject prefab in prefabs)
+        {
+            dictPrefabs.Add(prefab.name, prefab);
+        }
     }
 
-    void Update()
+    public GameObject GetPrefabFromKey(string name)
     {
-        
+        return dictPrefabs.GetValueOrDefault(name);
     }
 }
