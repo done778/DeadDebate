@@ -7,15 +7,21 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager UIInstance { get; private set; }
+
+    // 로비 씬 관련 변수
+    private GameObject characterSelectPanel;
+    private Button characterButton;
+    private GameObject charSelectPanel;
+
+    // 스테이지 씬 관련 변수
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
-    private GameObject charSelectPanel;
     private PlayerController curPlayer;
     private PlayerStatButton onClickDetected;
     private Button lobbyButton;
+
+
     bool isLoading;
-    private GameObject characterSelectPanel;
-    private Button characterButton;
 
     public event Action CloseUIPanel;
 
@@ -43,9 +49,8 @@ public class UIManager : MonoBehaviour
 
     public void EnterLobby()
     {
-        characterButton = GameObject.Find("CharacterButton")?.GetComponent<Button>();
-        charSelectPanel = GameObject.Find("CharacterSelectionUI");
-        characterButton.onClick.AddListener(OpenCharacterSelectPanel);
+        //characterButton = GameObject.Find("CharacterButton")?.GetComponent<Button>();
+        //characterButton.onClick.AddListener(OpenCharacterSelectPanel);
         //onClickDetected.OnButtonClicked += (string statType) =>
         //{
         //    curPlayer.IncreaseStat(statType);
@@ -107,6 +112,12 @@ public class UIManager : MonoBehaviour
         curPlayer.OnLevelUp -= (int temp) => OpenSelectPanel();
         onClickDetected.OnButtonClicked -= (string temp) => CloseSelectPanel();
         LoadScene("Lobby");
+    }
+
+
+    public void RegistCharSelectPanel(GameObject controller)
+    {
+        charSelectPanel = controller;
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
