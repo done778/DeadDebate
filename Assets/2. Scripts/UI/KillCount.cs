@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -15,7 +15,7 @@ public class KillCount : MonoBehaviour
         if (GameManager.Instance != null )
         {
             // 적이 처치된 이벤트가 발생하면 킬카운트++ 한다.
-            GameManager.Instance.OnKillCount += UpdateKillText;
+            EnemyPool.Instance.OnDeath += UpdateKillText;
         }
     }
 
@@ -23,7 +23,7 @@ public class KillCount : MonoBehaviour
     {
         if ( GameManager.Instance != null )  //중복방지
         {
-            GameManager.Instance.OnKillCount -= UpdateKillText;
+            EnemyPool.Instance.OnDeath -= UpdateKillText;
         }
     }
 
