@@ -30,13 +30,6 @@ public class UIManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoad;
     }
 
-    private void OnDestroy()
-    {
-        curPlayer.OnPlayerDie -= OpenGameoverPanel;
-        curPlayer.OnLevelUp -= (int temp) => OpenSelectPanel();
-        onClickDetected.OnButtonClicked -= (string temp) => CloseSelectPanel();
-    }
-
     public void LoadScene(string sceneName)
     {
         if (isLoading) return;
@@ -60,7 +53,6 @@ public class UIManager : MonoBehaviour
 
         curPlayer.OnPlayerDie += OpenGameoverPanel;
         curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();
-
         // 선택지에서 버튼 클릭시 패널을 비활성화하는 이벤트에 구독.
         onClickDetected.OnButtonClicked += (string temp) => CloseSelectPanel(); 
     }
@@ -89,13 +81,16 @@ public class UIManager : MonoBehaviour
 
     public void GoToLobby()
     {
-        LoadScene("LobbyYH");
+        curPlayer.OnPlayerDie -= OpenGameoverPanel;
+        curPlayer.OnLevelUp -= (int temp) => OpenSelectPanel();
+        onClickDetected.OnButtonClicked -= (string temp) => CloseSelectPanel();
+        LoadScene("Lobby");
     }
 
     // Stage 씬 진입을 감지함
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "StageYH")
+        if (scene.name == "Stage")
         {
             GameStart();
         }

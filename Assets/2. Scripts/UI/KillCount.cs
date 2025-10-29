@@ -14,6 +14,7 @@ public class KillCount : MonoBehaviour
 
         if (GameManager.Instance != null )
         {
+            // 적이 처치된 이벤트가 발생하면 킬카운트++ 한다.
             GameManager.Instance.OnKillCount += UpdateKillText;
         }
     }

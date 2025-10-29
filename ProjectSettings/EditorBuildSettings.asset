@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/developer/yunhyuk/TitleYH.unity
-    guid: c54d11a743e494e44a5a8dadf467a99c
+    path: Assets/1. Scenes/Title.unity
+    guid: 30e96f682a3445a4fb0b64af61f5e65f
   - enabled: 1
-    path: Assets/developer/yunhyuk/LobbyYH.unity
-    guid: cf987c237e8642d4b9c78c18bf8ad12f
+    path: Assets/1. Scenes/Lobby.unity
+    guid: 81d90861c9b401c40be1c8a94b1bfbe6
   - enabled: 1
-    path: Assets/developer/yunhyuk/StageYH.unity
-    guid: 3fa4f645857f19f49b68d9a1898aa75a
+    path: Assets/1. Scenes/Stage.unity
+    guid: c1a2a2c109072034082877b998248464
   m_configObjects: {}

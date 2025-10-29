@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     // 한결님 UI 업데이트 메서드를 여기에 구독하세요.
     public event Action OnTimerUpdate; // 1초마다 타이머 이벤트
-    public event Action OnKillCount; // 적 처치 시 이벤트 (적 관리 쪽으로)
+    public Action OnKillCount; // 적 처치 시 이벤트 (적 관리 쪽으로)
     // public event Action OnPlayerHpChange; // 플레이어 HP 변동 이벤트 (이거 플레이어 쪽으로)
 
     private Coroutine timerUpdate;
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     // Stage 씬 진입을 감지함
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "StageYH")
+        if (scene.name == "Stage")
         {
             GameStart();
         }
