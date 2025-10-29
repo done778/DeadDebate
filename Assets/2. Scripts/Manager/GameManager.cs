@@ -92,13 +92,13 @@ public class GameManager : MonoBehaviour
         UIManager.UIInstance.CloseUIPanel -= PlayGame;
         PauseGame();
     }
-    // 게임 일시 정지
+    // 스테이지 클리어
     public void StageClear()
     {
         GameOver(true);
     }
 
-    // 게임 재개
+    // 스테이지 실패
     public void StageFailed()
     {
         GameOver(false);
