@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     public GameObject player;
-    private PlayerContoller curPlayer;
+    private PlayerController curPlayer;
     private TimeManager timeManager;
     private PrefabManager prefabManager;
 
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
         // 플레이어를 태그로 찾습니다.
         player = GameObject.FindWithTag("Player");
-        curPlayer = player.GetComponent<PlayerContoller>();
+        curPlayer = player.GetComponent<PlayerController>();
 
         // 플레이어가 죽으면 클리어 실패 메서드를 실행한다.
         curPlayer.OnPlayerDie += StageFailed;
