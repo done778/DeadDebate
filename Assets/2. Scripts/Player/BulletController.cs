@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public int damage;
-    [SerializeField] private float bulletSpeed;
-   
-    void Start()
+    public int damage; // 공격력
+    [SerializeField] private float bulletSpeed = 10f; // 총알속도
+    [SerializeField] private float bulletLifeTime = 2f; // 총알유지시간
+
+    private float bulletTimer;
+
+    private void OnEnable()
     {
-        Destroy(gameObject, 2f);
+        bulletTimer = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Time.deltaTime * bulletSpeed * Vector3.forward);
+
+        bulletTimer += Time.deltaTime;
+        if (bulletTimer >= bulletLifeTime)
+        {
+            BulletPool.Instance.ReturnBullet(gameObject);
+        }
     }
 }

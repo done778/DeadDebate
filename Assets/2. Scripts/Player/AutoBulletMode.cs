@@ -29,7 +29,8 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
         if (nearest != null)
         {
             Vector3 direction = (nearest.transform.position - transform.position).normalized;
-            direction.y = 0f;
+
+            //direction.y = 0f; // 높이고정
 
             transform.rotation = Quaternion.LookRotation(direction); // 쏘는 방향보게
 
