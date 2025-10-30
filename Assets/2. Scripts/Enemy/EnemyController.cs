@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
         {
             int damage = other.gameObject.GetComponent<BulletController>().damage;
             TakeDamage(damage);
-            Destroy(other.gameObject);
+            ObjectManager.Instance.ReturnBullet(other.gameObject);
         }
     }
     // Update is called once per frame

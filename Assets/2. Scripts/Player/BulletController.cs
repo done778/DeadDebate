@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ public class BulletController : MonoBehaviour
         bulletTimer += Time.deltaTime;
         if (bulletTimer >= bulletLifeTime)
         {
-            BulletPool.Instance.ReturnBullet(gameObject);
+            ObjectManager.Instance.ReturnBullet(gameObject);
         }
     }
 }
