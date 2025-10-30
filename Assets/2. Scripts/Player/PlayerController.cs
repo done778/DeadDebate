@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
-    const int MUZZLE_INDEX = 1;
-
-    //플레이어 스탯
+{    
+    [Header("Player Settings")]
     public float moveSpeed = 10f; // 이동속도
     public float attackCoolTime = 0.3f; // 공격속도
     public float attackPower = 1f; // 공격력
@@ -17,9 +15,12 @@ public class PlayerController : MonoBehaviour
     public float AttackRange => attackRange;
 
 
+    //const int MUZZLE_INDEX = 1;
+    //private Vector3 muzzle;
+    [SerializeField] private Transform muzzle; // 총구
+
     public GameObject bullet;
-    private Renderer rend;
-    private Vector3 muzzle;
+    private Renderer rend;    
     private float elapsedCoolTime; // 쿨타임 경과 시간
 
     private int experience; // 경험치
@@ -168,15 +169,14 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void ShootBullet(Vector3 targetPosition)
+    public void ShootBullet()
     {
-        //이게 총구니까
-        muzzle = transform.GetChild(MUZZLE_INDEX).position;
-        //총구와 적방향을 계산하고
-        Vector3 direction = (targetPosition - muzzle).normalized;
-        //총구를 회전시키다면
-        Quaternion bulletRotation = Quaternion.LookRotation(direction);
+        if (muzzle == null)
+        {
+            Debug.LogWarning("Muzzle이 할당되지 않았습니다!");
+            return;
+        }
 
-        GameObject bulletObject = BulletPool.Instance.GetBullet(muzzle, bulletRotation);
+        GameObject bulletObject = BulletPool.Instance.GetBullet(muzzle.position, transform.rotation);
     }
 }

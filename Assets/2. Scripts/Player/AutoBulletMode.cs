@@ -39,7 +39,7 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
 
             transform.rotation = Quaternion.LookRotation(direction); // 쏘는 방향보게
 
-            player.ShootBullet(nearest.transform.position);
+            player.ShootBullet();
         }
     }    
 }

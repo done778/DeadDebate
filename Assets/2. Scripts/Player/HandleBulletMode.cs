@@ -42,7 +42,7 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
         //사거리 내에 적이있으면 마우스방향으로 발사
         if (isEnemyInRange)
         {
-            player.ShootBullet(target);
+            player.ShootBullet();
         }        
     }   
 }
