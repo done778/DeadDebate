@@ -10,25 +10,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [HideInInspector] public GameObject player;
-    private PlayerController curPlayer;
+    
     private TimeManager timeManager;
     private PrefabManager prefabManager;
 
     public Action OnGameStart; // 게임 시작 이벤트
     public Action<bool> OnGameOver; // 게임 종료 이벤트
-
-    // 한결님 UI 업데이트 메서드를 여기에 구독하세요.
     public Action OnTimerUpdate; // 1초마다 타이머 이벤트
     public Action OnKillCount; // 적 처치 시 이벤트 (적 관리 쪽으로)
-    // public event Action OnPlayerHpChange; // 플레이어 HP 변동 이벤트 (이거 플레이어 쪽으로)
 
     private Coroutine timerUpdate;
 
+    public PlayerController CurPlayer { get; private set; }
     public bool Playing { get; private set; }
     public int SurviveTime { get; private set; }
     public int SelectedPlayerType { get; private set; }
-
-    
 
     // 싱글톤
     void Awake()
