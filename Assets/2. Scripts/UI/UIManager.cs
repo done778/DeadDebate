@@ -68,7 +68,6 @@ public class UIManager : MonoBehaviour
 
         curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
         curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
-        onClickDetected.OnButtonClicked += (string temp) => SetSelectPanel(false);
         timeManager.timeOver += () => SetStageClearPanel(true);
     }
 
@@ -86,7 +85,6 @@ public class UIManager : MonoBehaviour
     }
     public void SetSelectPanel(bool isOpen)
     {
-        if (isOpen == false) { CloseUIPanel?.Invoke(); }
         levelUpPanel.SetActive(isOpen);
     }
     public void SetCharSelectPanel(bool isOpen)
@@ -99,7 +97,6 @@ public class UIManager : MonoBehaviour
     {
         curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
         curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
-        onClickDetected.OnButtonClicked += (string temp) => SetSelectPanel(false);
         timeManager.timeOver += () => SetStageClearPanel(true);
         LoadScene(goScene);
     }

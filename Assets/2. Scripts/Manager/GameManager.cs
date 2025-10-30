@@ -75,9 +75,6 @@ public class GameManager : MonoBehaviour
         // 플레이어가 레벨 업하면 게임을 멈추라고 한다. (매개변수는 안씀)
         curPlayer.OnLevelUp += (int temp) => PauseGame();
 
-        // 레벨 업 시 스탯 선택지 버튼을 클릭하면 게임을 재개한다.
-        UIManager.UIInstance.CloseUIPanel += PlayGame;
-
         GameObject.Find("HpBar").GetComponent<HpBar>().Init(player);
 
         timeManager.Init();
@@ -93,7 +90,6 @@ public class GameManager : MonoBehaviour
         // 구독한 이벤트 모두 해제하고 일시정지
         curPlayer.OnPlayerDie -= StageFailed;
         curPlayer.OnLevelUp -= (int temp) => PauseGame();
-        UIManager.UIInstance.CloseUIPanel -= PlayGame;
         timeManager.timeOver -= StageClear;
         PauseGame();
     }
@@ -146,6 +142,11 @@ public class GameManager : MonoBehaviour
     public void SetPlayerCharacter(int index)
     {
         SelectedPlayerType = index;
+    }
+
+    public void playerStatIncrease(string statType)
+    {
+        curPlayer.IncreaseStat(statType);
     }
 
     // Stage 씬 진입을 감지함
