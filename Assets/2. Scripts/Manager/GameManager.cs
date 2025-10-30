@@ -82,10 +82,17 @@ public class GameManager : MonoBehaviour
     private void GameOver(bool isClear)
     {
         Playing = false;
-        // 구독한 이벤트 모두 해제하고 일시정지
+
+        // 구독한 이벤트 모두 해제 
         curPlayer.OnPlayerDie -= StageFailed;
         curPlayer.OnLevelUp -= (int temp) => PauseGame();
         timeManager.timeOver -= StageClear;
+
+        // 클리어 여부에 따라 두 패널 중 하나 활성화
+        if (isClear) { UIManager.UIInstance.SetStageClearPanel(true); }
+        else { UIManager.UIInstance.SetGameoverPanel(true); }
+
+        // 일시정지
         PauseGame();
     }
     // 스테이지 클리어

@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
     private PlayerController curPlayer;
-    private TimeManager timeManager;
 
     bool isLoading;
 
@@ -64,7 +63,6 @@ public class UIManager : MonoBehaviour
 
         curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
         curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
-        timeManager.timeOver += () => SetStageClearPanel(true);
     }
 
     public void SetGameoverPanel(bool isOpen)
@@ -93,17 +91,12 @@ public class UIManager : MonoBehaviour
     {
         curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
         curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
-        timeManager.timeOver += () => SetStageClearPanel(true);
         LoadScene(goScene);
     }
 
     public void RegistCharSelectPanel(GameObject controller)
     {
         charSelectPanel = controller;
-    }
-    public void RegistTimeManager(TimeManager manager)
-    {
-        timeManager = manager;
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)

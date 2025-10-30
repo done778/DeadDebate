@@ -16,7 +16,6 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.RegistTimeManager(this);
-        UIManager.UIInstance.RegistTimeManager(this);
     }
 
     private void OnDestroy()
