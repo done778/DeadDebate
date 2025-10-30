@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private int experience; // 경험치
     private int expRequired; // 필요 경험치
     private int level; // 레벨    
+    private float baseAttackCoolTime; // 기본 공격 속도
+    private float increaseAttackSpeed; // 증가된 공격 속도
 
     private bool isInvincibilityl; // 무적
 
@@ -46,6 +48,8 @@ public class PlayerController : MonoBehaviour
         expRequired = 3;
         experience = 0;
         elapsedCoolTime = 0;
+        baseAttackCoolTime = attackCoolTime;
+        increaseAttackSpeed = 0f;
 
         currentHp = maxHp;
         //체력이 변할때마다 인보크해야
@@ -150,8 +154,9 @@ public class PlayerController : MonoBehaviour
                 Debug.Log($"공격력 증가!! 현재 공격력: {attackPower}");
                 break;
             case "AttackSpeed":
-                attackCoolTime = Mathf.Max(0.1f, attackCoolTime - 0.1f);
-                Debug.Log($"공격속도 증가!! 현재 공격속도: {attackCoolTime}");
+                increaseAttackSpeed += 0.1f;
+                attackCoolTime = attackCoolTime / (baseAttackCoolTime + increaseAttackSpeed);
+                Debug.Log($"공격속도 증가!! 현재 공격속도: {(1 + increaseAttackSpeed) * 100}%");
                 break;
             case "HealthPoint":
                 maxHp += 1;
