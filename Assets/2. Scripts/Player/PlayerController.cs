@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "AttackSpeed":
                 increaseAttackSpeed += 0.1f;
-                attackCoolTime = attackCoolTime / (baseAttackCoolTime + increaseAttackSpeed);
+                attackCoolTime = baseAttackCoolTime / (1 + increaseAttackSpeed);
                 Debug.Log($"공격속도 증가!! 현재 공격속도: {(1 + increaseAttackSpeed) * 100}%");
                 break;
             case "HealthPoint":
