@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     private Camera mainCamera;
     private Vector3 cameraPos;
 
@@ -13,6 +13,9 @@ public class CameraController : MonoBehaviour
         // 카메라 초기화
         mainCamera = Camera.main;
         mainCamera.transform.rotation = Quaternion.Euler(80f, 0f, 0f);
+
+        // 플레이어 찾아서 참조
+        player = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     void LateUpdate()

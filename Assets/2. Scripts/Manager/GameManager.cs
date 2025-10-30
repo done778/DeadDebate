@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
-    public GameObject player;
+
+    [HideInInspector] public GameObject player;
     private PlayerController curPlayer;
     private TimeManager timeManager;
     private PrefabManager prefabManager;
