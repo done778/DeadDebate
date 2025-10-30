@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,12 +13,13 @@ public class UIManager : MonoBehaviour
     private GameObject charSelectPanel;
 
     // 스테이지 씬 관련 변수
+    private GameObject pausePanel;
     private GameObject stageClearPanel;
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
     private PlayerController curPlayer;
     private PlayerStatButton onClickDetected;
-
+    private TimeManager timeManager;
 
     bool isLoading;
 
@@ -53,61 +55,62 @@ public class UIManager : MonoBehaviour
     public void GameStart()
     {
         curPlayer = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        pausePanel = GameObject.Find("PauseUI");
         stageClearPanel = GameObject.Find("StageClearUI");
         gameoverPanel = GameObject.Find("GameOverUI");
         levelUpPanel = GameObject.Find("LevelUpUI");
         onClickDetected = GameObject.Find("OnClickEvent").GetComponent<PlayerStatButton>();
 
+        pausePanel.SetActive(false);
         gameoverPanel.SetActive(false);
         levelUpPanel.SetActive(false);
         stageClearPanel.SetActive(false);
 
-        curPlayer.OnPlayerDie += OpenGameoverPanel;
-        curPlayer.OnLevelUp += (int temp) => OpenSelectPanel();
-        onClickDetected.OnButtonClicked += (string temp) => CloseSelectPanel();
+        curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
+        curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
+        onClickDetected.OnButtonClicked += (string temp) => SetSelectPanel(false);
+        timeManager.timeOver += () => SetStageClearPanel(true);
     }
 
-    public void OpenGameoverPanel()
+    public void SetGameoverPanel(bool isOpen)
     {
-        gameoverPanel.SetActive(true);
+        gameoverPanel.SetActive(isOpen);
+    }
+    public void SetStageClearPanel(bool isOpen)
+    {
+        stageClearPanel.SetActive(isOpen);
+    }
+    public void SetPausePanel(bool isOpen)
+    {
+        pausePanel.SetActive(isOpen);
+    }
+    public void SetSelectPanel(bool isOpen)
+    {
+        if (isOpen == false) { CloseUIPanel?.Invoke(); }
+        levelUpPanel.SetActive(isOpen);
+    }
+    public void SetCharSelectPanel(bool isOpen)
+    {
+        charSelectPanel.SetActive(isOpen);
     }
 
-    public void CloseGameoverPanel()
+    // 스테이지에서 퇴장 시 구독들 해지하고 나가야 함.
+    public void ExitStage(string goScene)
     {
-        gameoverPanel.SetActive(true);
-    }
-
-    public void OpenSelectPanel()
-    {
-        levelUpPanel.SetActive(true);
-    }
-
-    public void CloseSelectPanel()
-    {
-        CloseUIPanel?.Invoke();
-        levelUpPanel.SetActive(false);
-    }
-
-    public void OpenCharSelectPanel()
-    {
-        charSelectPanel.SetActive(true);
-    }
-
-    public void CloseCharSelectPanel()
-    {
-        charSelectPanel.SetActive(false);
-    }
-    public void GoToLobby()
-    {
-        curPlayer.OnPlayerDie -= OpenGameoverPanel;
-        curPlayer.OnLevelUp -= (int temp) => OpenSelectPanel();
-        onClickDetected.OnButtonClicked -= (string temp) => CloseSelectPanel();
-        LoadScene("Lobby");
+        curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
+        curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
+        onClickDetected.OnButtonClicked += (string temp) => SetSelectPanel(false);
+        timeManager.timeOver += () => SetStageClearPanel(true);
+        LoadScene(goScene);
     }
 
     public void RegistCharSelectPanel(GameObject controller)
     {
         charSelectPanel = controller;
+    }
+    public void RegistTimeManager(TimeManager manager)
+    {
+        timeManager = manager;
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)

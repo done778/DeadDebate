@@ -34,6 +34,6 @@ public class CharSelectController : MonoBehaviour
 
     private void ClosePanel()
     {
-        UIManager.UIInstance.CloseCharSelectPanel();
+        UIManager.UIInstance.SetCharSelectPanel(false);
     }
 }
