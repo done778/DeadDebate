@@ -16,6 +16,11 @@ public class AutoBulletMode : MonoBehaviour, IAttackMode
 
         foreach (GameObject enemy in enemys)
         {
+            //죽은 척 감지 안되게
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController == null || enemyController.IsDie)
+                continue;
+
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
             //공격사거리 적용
