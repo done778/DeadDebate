@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Settings")]
     public float moveSpeed = 10f; // 이동속도
     public float attackCoolTime = 0.3f; // 공격속도
-    public float attackPower = 1f; // 공격력
+    public int attackPower = 1; // 공격력
     [SerializeField] private int maxHp = 5; // 최대 체력
     private int currentHp = 0; // 현재 체력
     [SerializeField] private float attackRange = 10f; // 공격사거리
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
         switch (statType)
         {
             case "AttackPower":
-                attackPower += 1f;
+                attackPower += 1;
                 Debug.Log($"공격력 증가!! 현재 공격력: {attackPower}");
                 break;
             case "AttackSpeed":

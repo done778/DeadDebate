@@ -58,13 +58,13 @@ public class GameManager : MonoBehaviour
 
         // 플레이어를 태그로 찾습니다.
         player = GameObject.FindWithTag("Player");
-        curPlayer = player.GetComponent<PlayerController>();
+        CurPlayer = player.GetComponent<PlayerController>();
 
         // 플레이어가 죽으면 클리어 실패 메서드를 실행한다.
-        curPlayer.OnPlayerDie += StageFailed;
+        CurPlayer.OnPlayerDie += StageFailed;
 
         // 플레이어가 레벨 업하면 게임을 멈추라고 한다. (매개변수는 안씀)
-        curPlayer.OnLevelUp += (int temp) => PauseGame();
+        CurPlayer.OnLevelUp += (int temp) => PauseGame();
 
         GameObject.Find("HpBar").GetComponent<HpBar>().Init(player);
 
@@ -80,8 +80,8 @@ public class GameManager : MonoBehaviour
         Playing = false;
 
         // 구독한 이벤트 모두 해제 
-        curPlayer.OnPlayerDie -= StageFailed;
-        curPlayer.OnLevelUp -= (int temp) => PauseGame();
+        CurPlayer.OnPlayerDie -= StageFailed;
+        CurPlayer.OnLevelUp -= (int temp) => PauseGame();
         timeManager.timeOver -= StageClear;
 
         // 클리어 여부에 따라 두 패널 중 하나 활성화
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
 
     public void playerStatIncrease(string statType)
     {
-        curPlayer.IncreaseStat(statType);
+        CurPlayer.IncreaseStat(statType);
     }
 
     // Stage 씬 진입을 감지함
