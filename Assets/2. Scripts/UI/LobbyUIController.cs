@@ -15,7 +15,7 @@ public class LobbyUIController : MonoBehaviour
         switch(index)
         {
             case 0:
-                UIManager.UIInstance.LoadScene("Stage");
+                UIManager.UIInstance.LoadScene("StageYH");
                 break;
             case 1:
                 UIManager.UIInstance.LoadScene("StageYS");
