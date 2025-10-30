@@ -101,7 +101,7 @@ public class UIManager : MonoBehaviour
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Stage")
+        if (scene.name.Contains("Stage"))
         {
             GameStart();
         }

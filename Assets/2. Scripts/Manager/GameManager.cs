@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [HideInInspector] public GameObject player;
+    public GameObject player;
     
     private TimeManager timeManager;
     private PrefabManager prefabManager;
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
     // Stage 씬 진입을 감지함
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Stage")
+        if (scene.name.Contains("Stage"))
         {
             GameStart();
         }
