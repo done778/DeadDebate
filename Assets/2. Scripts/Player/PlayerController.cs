@@ -168,11 +168,15 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void ShootBullet()
+    public void ShootBullet(Vector3 targetPosition)
     {
-        muzzle = transform.GetChild(MUZZLE_INDEX).GetComponent<Transform>().position;
-        //Instantiate(bullet, muzzle, transform.rotation);
+        //이게 총구니까
+        muzzle = transform.GetChild(MUZZLE_INDEX).position;
+        //총구와 적방향을 계산하고
+        Vector3 direction = (targetPosition - muzzle).normalized;
+        //총구를 회전시키다면
+        Quaternion bulletRotation = Quaternion.LookRotation(direction);
 
-        GameObject bulletObject = BulletPool.Instance.GetBullet(muzzle, transform.rotation);
+        GameObject bulletObject = BulletPool.Instance.GetBullet(muzzle, bulletRotation);
     }
 }
