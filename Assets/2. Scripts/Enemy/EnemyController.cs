@@ -13,7 +13,8 @@ public class EnemyController : MonoBehaviour
     public Transform muzzle;
 
     private Animator anim;
-    private Collider col;
+    //인스펙터에서 직접 참조
+    [SerializeField] private Collider col;
 
     //실제 수치들
     private EnemyData currentStat;
@@ -43,7 +44,6 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        col = GetComponent<Collider>();
         anim = GetComponent<Animator>();
 
         currentStat = data.GetCopy();

@@ -448,6 +448,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 8ca402475e7968144954c89c259bac13, type: 2}
   bullet: {fileID: 0}
   muzzle: {fileID: 0}
+  col: {fileID: 1029976856386771196}
 --- !u!136 &1029976856386771196
 CapsuleCollider:
   m_ObjectHideFlags: 0
