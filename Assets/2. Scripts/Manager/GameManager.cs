@@ -10,29 +10,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [HideInInspector] public GameObject player;
-    private PlayerController curPlayer;
+    
     private TimeManager timeManager;
     private PrefabManager prefabManager;
 
-    private float playingTime;
-
     public Action OnGameStart; // 게임 시작 이벤트
     public Action<bool> OnGameOver; // 게임 종료 이벤트
-    public event Action OnStageClear; // 스테이지 클리어 성공 이벤트
-    public event Action OnStageFailed; // 스테이지 클리어 실패 이벤트
-
-    // 한결님 UI 업데이트 메서드를 여기에 구독하세요.
     public Action OnTimerUpdate; // 1초마다 타이머 이벤트
     public Action OnKillCount; // 적 처치 시 이벤트 (적 관리 쪽으로)
-    // public event Action OnPlayerHpChange; // 플레이어 HP 변동 이벤트 (이거 플레이어 쪽으로)
 
     private Coroutine timerUpdate;
 
+    public PlayerController CurPlayer { get; private set; }
     public bool Playing { get; private set; }
     public int SurviveTime { get; private set; }
     public int SelectedPlayerType { get; private set; }
-
-    
 
     // 싱글톤
     void Awake()
@@ -62,7 +54,6 @@ public class GameManager : MonoBehaviour
     // Stage 씬에 들어가면 실행될 메서드. 게임 시작을 위한 초기화
     public void GameStart()
     {
-        playingTime = 0f;
         Playing = true;
 
         // 플레이어를 태그로 찾습니다.
@@ -87,10 +78,17 @@ public class GameManager : MonoBehaviour
     private void GameOver(bool isClear)
     {
         Playing = false;
-        // 구독한 이벤트 모두 해제하고 일시정지
+
+        // 구독한 이벤트 모두 해제 
         curPlayer.OnPlayerDie -= StageFailed;
         curPlayer.OnLevelUp -= (int temp) => PauseGame();
         timeManager.timeOver -= StageClear;
+
+        // 클리어 여부에 따라 두 패널 중 하나 활성화
+        if (isClear) { UIManager.UIInstance.SetStageClearPanel(true); }
+        else { UIManager.UIInstance.SetGameoverPanel(true); }
+
+        // 일시정지
         PauseGame();
     }
     // 스테이지 클리어

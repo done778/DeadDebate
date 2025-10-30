@@ -18,12 +18,8 @@ public class UIManager : MonoBehaviour
     private GameObject gameoverPanel;
     private GameObject levelUpPanel;
     private PlayerController curPlayer;
-    private PlayerStatButton onClickDetected;
-    private TimeManager timeManager;
 
     bool isLoading;
-
-    public event Action CloseUIPanel;
 
     void Awake()
     {
@@ -59,7 +55,6 @@ public class UIManager : MonoBehaviour
         stageClearPanel = GameObject.Find("StageClearUI");
         gameoverPanel = GameObject.Find("GameOverUI");
         levelUpPanel = GameObject.Find("LevelUpUI");
-        onClickDetected = GameObject.Find("OnClickEvent").GetComponent<PlayerStatButton>();
 
         pausePanel.SetActive(false);
         gameoverPanel.SetActive(false);
@@ -68,7 +63,6 @@ public class UIManager : MonoBehaviour
 
         curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
         curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
-        timeManager.timeOver += () => SetStageClearPanel(true);
     }
 
     public void SetGameoverPanel(bool isOpen)
@@ -97,17 +91,12 @@ public class UIManager : MonoBehaviour
     {
         curPlayer.OnPlayerDie += () => SetGameoverPanel(true);
         curPlayer.OnLevelUp += (int temp) => SetSelectPanel(true);
-        timeManager.timeOver += () => SetStageClearPanel(true);
         LoadScene(goScene);
     }
 
     public void RegistCharSelectPanel(GameObject controller)
     {
         charSelectPanel = controller;
-    }
-    public void RegistTimeManager(TimeManager manager)
-    {
-        timeManager = manager;
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
