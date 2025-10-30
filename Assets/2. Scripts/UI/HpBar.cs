@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
-    [SerializeField] Transform Hp;
-    [SerializeField] Camera cam;
+    [SerializeField] Image HpIndicator;
+    private PlayerController player;
 
-    private void Start()
+    public void Init(GameObject playerInfo)
     {
-        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        player = playerInfo.GetComponent<PlayerController>();
+        player.OnHpChanged += HpUIUpdate;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        Quaternion Q_hp = Quaternion.LookRotation(Hp.position - cam.transform.position);
+        player.OnHpChanged -= HpUIUpdate;
+    }
 
-        Vector3 hpAngle = Quaternion.RotateTowards(Hp.rotation, Q_hp, 200).eulerAngles;
-        Hp.rotation = Quaternion.Euler(0, hpAngle.y, 0);
+    private void HpUIUpdate(int cur, int max)
+    {
+        HpIndicator.fillAmount = (float)cur / max;
     }
 }

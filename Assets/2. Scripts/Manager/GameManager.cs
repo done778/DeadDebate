@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
         // 레벨 업 시 스탯 선택지 버튼을 클릭하면 게임을 재개한다.
         UIManager.UIInstance.CloseUIPanel += PlayGame;
 
+        GameObject.Find("HpBar").GetComponent<HpBar>().Init(player);
+
         timeManager.Init();
         timeManager.timeOver += StageClear;
 
