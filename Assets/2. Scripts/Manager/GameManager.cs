@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         curPlayer.OnPlayerDie -= StageFailed;
         curPlayer.OnLevelUp -= (int temp) => PauseGame();
         UIManager.UIInstance.CloseUIPanel -= PlayGame;
+        timeManager.timeOver -= StageClear;
         PauseGame();
     }
     // 스테이지 클리어

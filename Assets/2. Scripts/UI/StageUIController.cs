@@ -5,9 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class StageUIController : MonoBehaviour
 {
+    // 인게임 Pause 버튼 클릭
+    public void OnPauseButtonClick()
+    {
+        UIManager.UIInstance.SetPausePanel(true);
+        GameManager.Instance.PauseGame();
+    }
+
+    // Pause 패널에서 각 버튼 클릭
+    public void OnResumeButtonClick()
+    {
+        UIManager.UIInstance.SetPausePanel(false);
+        GameManager.Instance.PlayGame();
+    }
+
+    // Go to lobby 버튼 클릭
     public void OnLobbyButtonClick()
     {
-        UIManager.UIInstance.LoadScene("Lobby");
+        UIManager.UIInstance.ExitStage("Lobby");
     }
 
     public void OnRetryButtonClick()
@@ -20,6 +35,6 @@ public class StageUIController : MonoBehaviour
     // 아직 여러 스테이지가 구현되지 않아 로비로 가도록 함.
     public void OnNextButtonClick()
     {
-        UIManager.UIInstance.LoadScene("Lobby");
+        UIManager.UIInstance.ExitStage("Lobby");
     }
 }

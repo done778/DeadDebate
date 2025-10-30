@@ -16,6 +16,7 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.RegistTimeManager(this);
+        UIManager.UIInstance.RegistTimeManager(this);
     }
 
     private void OnDestroy()
@@ -29,7 +30,7 @@ public class TimeManager : MonoBehaviour
         if (remainTime <= 0)
         {
             // 시간이 다 됨을 알림.
-            timeOver.Invoke();
+            timeOver?.Invoke();
         }
     }
     public void Init()

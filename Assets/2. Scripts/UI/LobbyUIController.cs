@@ -35,6 +35,6 @@ public class LobbyUIController : MonoBehaviour
 
     public void OnSelectButtonClick()
     {
-        UIManager.UIInstance.OpenCharSelectPanel();
+        UIManager.UIInstance.SetCharSelectPanel(true);
     }
 }
