@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bullet"))
         {
-            //TakeDamage(damage);
+            TakeDamage(GameManager.Instance.CurPlayer.attackPower);
             ObjectManager.Instance.ReturnBullet(other.gameObject);
         }
     }
