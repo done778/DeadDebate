@@ -1,13 +1,11 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    const int MUZZLE_INDEX = 1;
-
-    //플레이어 스탯
+    [Header("Player Settings")]
     public float moveSpeed = 10f; // 이동속도
     public float attackCoolTime = 0.3f; // 공격속도
     public float attackPower = 1f; // 공격력
@@ -17,9 +15,12 @@ public class PlayerController : MonoBehaviour
     public float AttackRange => attackRange;
 
 
+    //const int MUZZLE_INDEX = 1;
+    //private Vector3 muzzle;
+    [SerializeField] private Transform muzzle; // 총구
+
     public GameObject bullet;
     private Renderer rend;
-    private Vector3 muzzle;
     private float elapsedCoolTime; // 쿨타임 경과 시간
 
     private int experience; // 경험치
@@ -39,13 +40,13 @@ public class PlayerController : MonoBehaviour
     {
         attackModeController = GetComponent<AttackModeController>(); // 공격모드
 
-        rend = transform.GetChild(0).GetComponent<Renderer>();        
+        rend = transform.GetChild(0).GetComponent<Renderer>();
 
         level = 1;
         expRequired = 3;
         experience = 0;
         elapsedCoolTime = 0;
-        
+
         currentHp = maxHp;
         //체력이 변할때마다 인보크해야
         OnHpChanged?.Invoke(currentHp, maxHp);
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 inputDirection = GetNormalizedDirection();
-        Move(inputDirection);        
+        Move(inputDirection);
 
         elapsedCoolTime -= Time.deltaTime;
         if (elapsedCoolTime < 0)
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
         if (direction == Vector3.zero) return;
 
         Vector3 move = direction * Time.deltaTime * moveSpeed;
-        transform.Translate(move, Space.World);       
+        transform.Translate(move, Space.World);
     }
 
     public void GetExp(int amount)
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         level++;
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
-        
+
         OnLevelUp?.Invoke(level); // 레벨업시
     }
 
@@ -167,12 +168,18 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-    
+
     public void ShootBullet()
     {
-        muzzle = transform.GetChild(MUZZLE_INDEX).GetComponent<Transform>().position;
-        //Instantiate(bullet, muzzle, transform.rotation);
+        if (muzzle == null)
+        {
+            Debug.LogWarning("Muzzle이 할당되지 않았습니다!");
+            return;
+        }
 
-        GameObject bulletObject = BulletPool.Instance.GetBullet(muzzle, transform.rotation);
+        GameObject bullet = ObjectManager.Instance.GetPlayerBullet();
+        bullet.transform.position = muzzle.position;
+        bullet.transform.rotation = muzzle.rotation;
+        //BulletPool.Instance.GetBullet(muzzle.position, transform.rotation);
     }
 }

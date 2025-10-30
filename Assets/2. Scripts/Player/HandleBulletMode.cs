@@ -26,6 +26,11 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
 
         foreach (GameObject enemy in enemys)
         {
+            //죽은적 감지 안되게
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController == null || enemyController.IsDie)
+                continue;
+
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy <= player.AttackRange)
             {

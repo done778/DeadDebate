@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +36,7 @@ public class BulletPool : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab);
         bullet.SetActive(false);
-        bullet.transform.SetParent(null); // 부모가 없어야 갈길감
+        bullet.transform.SetParent(transform);
 
         return bullet;
     }
@@ -48,6 +48,7 @@ public class BulletPool : MonoBehaviour
         bullet.transform.position = position;
         bullet.transform.rotation = rotation;
         bullet.SetActive(true);
+        bullet.transform.SetParent(null);
 
         return bullet;
     }
@@ -56,5 +57,6 @@ public class BulletPool : MonoBehaviour
     {
         bullet.SetActive(false);
         bulletPool.Enqueue(bullet);
+        bullet.transform.SetParent(transform);
     }
 }

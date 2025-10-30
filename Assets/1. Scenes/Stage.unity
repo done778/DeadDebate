@@ -280,6 +280,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75633455}
   m_CullTransparentMesh: 1
+--- !u!1 &106819347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106819349}
+  - component: {fileID: 106819348}
+  m_Layer: 0
+  m_Name: ObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &106819348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106819347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918e5bd7708bf6b42943e1a448b11104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBulletCount: 20
+  enemyBulletCount: 50
+--- !u!4 &106819349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106819347}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.4818373, y: 0.95732987, z: 2.2284553}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144984763
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +460,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144984763}
   m_CullTransparentMesh: 1
---- !u!1001 &145926677
+--- !u!1001 &173842169
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -428,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.38
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -436,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -471,10 +517,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
---- !u!4 &145926679 stripped
+--- !u!4 &173842170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
-  m_PrefabInstance: {fileID: 145926677}
+  m_PrefabInstance: {fileID: 173842169}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &327432917
 GameObject:
@@ -688,7 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 1993661690687772491, guid: ede407c9bab482a49a4303fec00e1295, type: 3}
-  - {fileID: 1993661690687772491, guid: 6000374519f362244bbc146763b98711, type: 3}
+  - {fileID: 1231368708421717830, guid: ced7a7a940102364e84591462d0645e8, type: 3}
   - {fileID: 8622035515571568916, guid: ac9f419bf2b8e1e4cbe8f7f8fe1a47a4, type: 3}
   - {fileID: 8622035515571568916, guid: 2123e6d470ad8d843805f44bf36daf98, type: 3}
 --- !u!4 &387049370
@@ -811,7 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9915e4c5610c5904caa373eb0bc6bd33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 145926679}
+  player: {fileID: 173842170}
 --- !u!1 &492661552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5330,7 +5376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossTrs: {fileID: 1468066795}
-  player: {fileID: 145926679}
+  player: {fileID: 0}
   spawnRadius: 20
   exclusionRadius: 10
   spawnPerWave: 1
@@ -5374,9 +5420,10 @@ SceneRoots:
   - {fileID: 1879744649}
   - {fileID: 2099206312}
   - {fileID: 327432921}
-  - {fileID: 145926677}
   - {fileID: 1468066795}
   - {fileID: 1293113702}
   - {fileID: 814757863}
   - {fileID: 387049370}
   - {fileID: 627676198}
+  - {fileID: 106819349}
+  - {fileID: 173842169}

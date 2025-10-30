@@ -13,7 +13,9 @@ public class RangedAttack : MonoBehaviour, IAttackBehaviour
     {
         if (target != projectilePrefab && muzzle != null)
         {
-            Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+            GameObject bullet = ObjectManager.Instance.GetEnemyBullet();
+            bullet.transform.position = muzzle.position;
+            bullet.transform.rotation = muzzle.rotation;
         }
     }
 }
