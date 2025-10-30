@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CharSelectController : MonoBehaviour
 {
-    private int selected = 0;
     [SerializeField] private List<Image> checkImages = new List<Image>();
     private void Awake()
     {

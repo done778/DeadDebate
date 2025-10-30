@@ -14,12 +14,8 @@ public class GameManager : MonoBehaviour
     private TimeManager timeManager;
     private PrefabManager prefabManager;
 
-    private float playingTime;
-
     public Action OnGameStart; // 게임 시작 이벤트
     public Action<bool> OnGameOver; // 게임 종료 이벤트
-    public event Action OnStageClear; // 스테이지 클리어 성공 이벤트
-    public event Action OnStageFailed; // 스테이지 클리어 실패 이벤트
 
     // 한결님 UI 업데이트 메서드를 여기에 구독하세요.
     public Action OnTimerUpdate; // 1초마다 타이머 이벤트
@@ -62,7 +58,6 @@ public class GameManager : MonoBehaviour
     // Stage 씬에 들어가면 실행될 메서드. 게임 시작을 위한 초기화
     public void GameStart()
     {
-        playingTime = 0f;
         Playing = true;
 
         // 플레이어를 태그로 찾습니다.
