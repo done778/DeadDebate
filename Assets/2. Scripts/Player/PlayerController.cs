@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     private float maxWorldBounds;
     Vector3 limitPos;
 
+    [SerializeField] private CameraRigController cameraRigController; // 카메라 Rig 스크립트
+
     private void Start()
     {
         attackModeController = GetComponent<AttackModeController>(); // 공격모드        
@@ -162,12 +164,34 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"현재체력: {currentHp}");
     }
 
+    //private void Move(Vector3 direction)
+    //{
+    //    if (direction == Vector3.zero) return;
+
+    //    Vector3 move = direction * Time.deltaTime * moveSpeed;
+    //    transform.Translate(move, Space.World);
+    //    limitPos = transform.position;
+    //    limitPos.x = Mathf.Clamp(transform.position.x, minWorldBounds, maxWorldBounds);
+    //    limitPos.z = Mathf.Clamp(transform.position.z, minWorldBounds, maxWorldBounds);
+    //    transform.position = limitPos;
+    //}
+
     private void Move(Vector3 direction)
     {
-        if (direction == Vector3.zero) return;
+        if (direction == Vector3.zero)
+        {
+            return;
+        }
 
-        Vector3 move = direction * Time.deltaTime * moveSpeed;
+        Quaternion cameraRotation = cameraRigController.GetCameraRotation();
+
+        Vector3 worldMoveDirection = cameraRotation * direction;
+
+        worldMoveDirection.y = 0f;
+
+        Vector3 move = worldMoveDirection.normalized * Time.deltaTime * moveSpeed;
         transform.Translate(move, Space.World);
+
         limitPos = transform.position;
         limitPos.x = Mathf.Clamp(transform.position.x, minWorldBounds, maxWorldBounds);
         limitPos.z = Mathf.Clamp(transform.position.z, minWorldBounds, maxWorldBounds);
