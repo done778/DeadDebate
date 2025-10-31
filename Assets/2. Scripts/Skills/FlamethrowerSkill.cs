@@ -28,12 +28,7 @@ public class FlamethrowerSkill : SkillBase
             var enemy = hit.collider.GetComponentInParent<EnemyController>();
             if (enemy != null)
             {
-                enemy.gameObject.SendMessage
-                    (
-                    "TakeDamage",
-                    damage,
-                    SendMessageOptions.DontRequireReceiver
-                    );
+                enemy.TakeDamage(damage);
             }
         }
         else

@@ -26,18 +26,12 @@ public class ElectricitySkill : SkillBase
         {
             if (hit.gameObject == player.gameObject) continue;
             Debug.Log(hit.name);
-            var enemy = hit.GetComponent<EnemyController>();
+            var enemy = hit.GetComponentInParent<EnemyController>();
             if (enemy != null)
             {
-                enemy.gameObject.SendMessage
-                (
-                    "TakeDamage",
-                    damage,
-                    SendMessageOptions.DontRequireReceiver
-                    );
-            }
+               enemy.TakeDamage(damage);
 
-        }
+            }
 
     }
     private void OnDrawGizmosSelected()

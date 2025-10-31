@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -126,7 +126,7 @@ public class EnemyController : MonoBehaviour
         this.isBoss = isBoss;
     }
 
-    private void TakeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
         if (isDie) return;
 
