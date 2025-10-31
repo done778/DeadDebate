@@ -5882,7 +5882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossTrs: {fileID: 1468066795}
-  player: {fileID: 0}
+  player: {fileID: 173842170}
   spawnRadius: 20
   exclusionRadius: 10
   spawnPerWave: 1
