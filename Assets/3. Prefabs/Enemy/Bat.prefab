@@ -539,7 +539,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4000012703179492}
@@ -583,7 +583,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 7f4450fc02940cc43ba3a769ef46de53, type: 2}
   bullet: {fileID: 1231368708421717830, guid: ced7a7a940102364e84591462d0645e8, type: 3}
   muzzle: {fileID: 818095476505051440}
-  col: {fileID: 3142192531600779723}
+  col: {fileID: 1500374205933474546}
 --- !u!54 &-4343502785710458459
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -908,7 +908,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012707299362}
-  - component: {fileID: 3142192531600779723}
   m_Layer: 0
   m_Name: HeadControl
   m_TagString: Untagged
@@ -933,29 +932,6 @@ Transform:
   - {fileID: 4000014236083480}
   m_Father: {fileID: 4000011258812582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &3142192531600779723
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000012521613348}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.01
-  m_Height: 0.01
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1000012758724070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,8 +1024,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4000011258812582}
   m_Father: {fileID: 4000010273486942}
@@ -1282,6 +1258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011258812582}
+  - component: {fileID: 1500374205933474546}
   m_Layer: 0
   m_Name: Bat1Control
   m_TagString: Untagged
@@ -1307,6 +1284,29 @@ Transform:
   - {fileID: 4000011531103456}
   m_Father: {fileID: 4000014270920404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1500374205933474546
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013870337248}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.01
+  m_Height: 0.01
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.007, z: 0}
 --- !u!1 &1000013930278250
 GameObject:
   m_ObjectHideFlags: 0
