@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/1. Scenes/Lobby.unity
     guid: 81d90861c9b401c40be1c8a94b1bfbe6
   - enabled: 1
-    path: Assets/1. Scenes/Stage.unity
+    path: Assets/1. Scenes/StageYH.unity
     guid: c1a2a2c109072034082877b998248464
   - enabled: 1
     path: Assets/1. Scenes/StageHG.unity

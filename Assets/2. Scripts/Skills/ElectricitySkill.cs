@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElectricitySkill : SkillBase
 {
-    public float damage = 20f;
+    public int damage = 20;
     public float radius = 4f;
     public Vector3 offset;
     public float effectLifeTime = 2f;
@@ -25,7 +25,18 @@ public class ElectricitySkill : SkillBase
         foreach (var hit in hits)
         {
             if (hit.gameObject == player.gameObject) continue;
-            Debug.Log("hitSkill");
+            
+            var enemy = hit.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.gameObject.SendMessage
+                (
+                    "TakeDamage",
+                    damage,
+                    SendMessageOptions.DontRequireReceiver
+                    );
+            }
+
         }
 
     }

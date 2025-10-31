@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlamethrowerSkill : SkillBase
 {
-    public float damage = 30f;
+    public int damage = 30;
     public float range = 15f;
     public Vector3 offset = new Vector3(0, 0.5f, 0);
     public LayerMask hitMask = ~0;
@@ -25,8 +25,16 @@ public class FlamethrowerSkill : SkillBase
         if (Physics.Raycast(origin, dir, out RaycastHit hit, range, hitMask, QueryTriggerInteraction.Collide))
         {
             if (hit.transform.root == player) return;
-
-            Debug.Log($"{hit.collider.name}");
+            var enemy = hit.collider.GetComponentInParent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.gameObject.SendMessage
+                    (
+                    "TakeDamage",
+                    damage,
+                    SendMessageOptions.DontRequireReceiver
+                    );
+            }
         }
         else
         {
