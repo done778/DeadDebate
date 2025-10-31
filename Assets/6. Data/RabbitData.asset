@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RabbitData
   m_EditorClassIdentifier: 
   healthPoint: 10
-  attakPower: 1
-  exp: 1
-  moveSpeed: 3
+  attakPower: 2
+  exp: 5
+  moveSpeed: 10
   attackSpeed: 1
   range: 1.5
   enemyType: 3
