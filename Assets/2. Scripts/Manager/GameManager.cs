@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     
     private TimeManager timeManager;
     private PrefabManager prefabManager;
+    private DmgNumCreator dmgNumCreator;
 
     public Action OnGameStart; // 게임 시작 이벤트
     public Action<bool> OnGameOver; // 게임 종료 이벤트
@@ -125,6 +126,10 @@ public class GameManager : MonoBehaviour
     {
         prefabManager = manager;
     }
+    public void RegistDmgNumCreator(DmgNumCreator creator)
+    {
+        dmgNumCreator = creator;
+    }
 
     // 다른 매니저에서 프리팹을 가져갈 수 있게 함. (딕셔너리)
     public GameObject GetPrefab(string name)
@@ -137,15 +142,21 @@ public class GameManager : MonoBehaviour
         return prefab;
     }
 
+    // 게임에서 씬 전환에도 유지되어야할 데이터를 갖고 있거나
+    // 다른 두 오브젝트 간 상호작용의 중개자 역할을 함.
     public void SetPlayerCharacter(int index)
     {
         SelectedPlayerType = index;
     }
-
     public void playerStatIncrease(string statType)
     {
         CurPlayer.IncreaseStat(statType);
     }
+    public void IndicateDamage(Vector3 position, int dmg)
+    {
+        dmgNumCreator.DamageTextCreate(position, dmg);
+    }
+
 
     // Stage 씬 진입을 감지함
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)

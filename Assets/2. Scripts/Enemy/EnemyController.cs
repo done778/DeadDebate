@@ -61,7 +61,9 @@ public class EnemyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bullet"))
         {
-            TakeDamage(GameManager.Instance.CurPlayer.attackPower);
+            int damage = GameManager.Instance.CurPlayer.attackPower;
+            TakeDamage(damage);
+            GameManager.Instance.IndicateDamage(transform.position, damage);
             ObjectManager.Instance.ReturnBullet(other.gameObject);
 
             //총알 피격 이펙트
