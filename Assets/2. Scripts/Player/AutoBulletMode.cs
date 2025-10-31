@@ -5,29 +5,28 @@ using UnityEngine;
 public class AutoBulletMode : MonoBehaviour, IAttackMode
 {
     public void Attack(PlayerController player)
-    {
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy"); // 적들을 담은 리스트
+    {        
+        List<EnemyController> enemies = EnemyPool.Instance.GetEnemies();
 
-        if (enemys.Length == 0) // 적이 없으면
+        if (enemies.Count == 0) // 적이 없으면
             return;
 
-        GameObject nearest = null; // 가장 가까운놈
+        EnemyController nearest = null; // 가장 가까운놈
         float minDistance = float.MaxValue; // 적 최소거리(임의 큰값)
 
-        foreach (GameObject enemy in enemys)
+        foreach (EnemyController enemyController in enemies)
         {
-            //죽은 척 감지 안되게
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            //죽은 척 감지 안되게            
             if (enemyController == null || enemyController.IsDie)
                 continue;
 
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            float distance = Vector3.Distance(transform.position, enemyController.transform.position);
 
             //공격사거리 적용
             if (distance <= player.AttackRange && distance < minDistance)
             {
                 minDistance = distance;
-                nearest = enemy;
+                nearest = enemyController;
             }
         }
 

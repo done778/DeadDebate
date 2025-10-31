@@ -20,18 +20,17 @@ public class HandleBulletMode : MonoBehaviour, IAttackMode
 
         transform.rotation = Quaternion.LookRotation(direction); // 마우스방향 보기
 
-        //공격사거리 안에 적이 있는지
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        //공격사거리 안에 적이 있는지        
+        List<EnemyController> enemies = EnemyPool.Instance.GetEnemies();
         bool isEnemyInRange = false;
 
-        foreach (GameObject enemy in enemys)
+        foreach (EnemyController enemyController in enemies)
         {
-            //죽은적 감지 안되게
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            //죽은적 감지 안되게            
             if (enemyController == null || enemyController.IsDie)
                 continue;
 
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            float distanceToEnemy = Vector3.Distance(transform.position, enemyController.transform.position);
             if (distanceToEnemy <= player.AttackRange)
             {
                 isEnemyInRange = true;
