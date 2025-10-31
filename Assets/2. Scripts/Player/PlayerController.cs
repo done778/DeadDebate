@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private bool isInvincibilityl; // 무적
 
     private AttackModeController attackModeController; // 공격모드
+    //private PlayerAnimatorController playerAnimatorController; // 모션
 
     private Vector3 inputDirection;
     public Vector3 InputDirection{ get{ return inputDirection; } }
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         attackModeController = GetComponent<AttackModeController>(); // 공격모드        
+        //playerAnimatorController = GetComponent<PlayerAnimatorController>(); // 모션
         rend = GetComponentInChildren<Renderer>();
 
         // 플레이어 이동 가능 영역 불러오기
@@ -100,10 +102,13 @@ public class PlayerController : MonoBehaviour
         inputDirection = GetNormalizedDirection();
         Move(inputDirection);
 
+        //playerAnimatorController.UpdateMovementAnimation(inputDirection);
+
         elapsedCoolTime -= Time.deltaTime;
         if (elapsedCoolTime < 0)
         {
             attackModeController.GetCurrentMode().Attack(this); // 공격방식
+            //playerAnimatorController.PlayRunAttack(); // 공격모션
             elapsedCoolTime = attackCoolTime;
         }
     }
@@ -111,6 +116,7 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         OnPlayerDie?.Invoke(); // 플레이어 사망시
+        //playerAnimatorController.PlayDeath(); // 죽는모션
     }
 
     private Vector3 GetNormalizedDirection()
