@@ -313,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 4
+  m_text: Stage HG
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d2029314fabf3746888e58897417b13, type: 2}
   m_sharedMaterial: {fileID: 1468402432367300757, guid: 0d2029314fabf3746888e58897417b13, type: 2}
@@ -729,7 +729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 2
+  m_text: Stage YS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d2029314fabf3746888e58897417b13, type: 2}
   m_sharedMaterial: {fileID: 1468402432367300757, guid: 0d2029314fabf3746888e58897417b13, type: 2}
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 1
+  m_text: Stage YH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d2029314fabf3746888e58897417b13, type: 2}
   m_sharedMaterial: {fileID: 1468402432367300757, guid: 0d2029314fabf3746888e58897417b13, type: 2}
@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 908864586}
   - component: {fileID: 908864585}
   m_Layer: 5
-  m_Name: Stage4Button
+  m_Name: StageHGButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1962,7 +1962,7 @@ GameObject:
   - component: {fileID: 1216053224}
   - component: {fileID: 1216053223}
   m_Layer: 5
-  m_Name: Stage2Button
+  m_Name: StageYSButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2538,7 +2538,7 @@ GameObject:
   - component: {fileID: 1614317571}
   - component: {fileID: 1614317570}
   m_Layer: 5
-  m_Name: Stage1Button
+  m_Name: StageYHButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3114,7 +3114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 3
+  m_text: Stage TY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d2029314fabf3746888e58897417b13, type: 2}
   m_sharedMaterial: {fileID: 1468402432367300757, guid: 0d2029314fabf3746888e58897417b13, type: 2}
@@ -3406,7 +3406,7 @@ GameObject:
   - component: {fileID: 2118626016}
   - component: {fileID: 2118626015}
   m_Layer: 5
-  m_Name: Stage3Button
+  m_Name: StageTYButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

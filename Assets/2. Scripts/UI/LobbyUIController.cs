@@ -15,16 +15,16 @@ public class LobbyUIController : MonoBehaviour
         switch(index)
         {
             case 0:
-                UIManager.UIInstance.LoadScene("Stage");
+                UIManager.UIInstance.LoadScene("StageYH");
                 break;
             case 1:
-                UIManager.UIInstance.LoadScene("Stage");
+                UIManager.UIInstance.LoadScene("StageYS");
                 break;
             case 2:
-                UIManager.UIInstance.LoadScene("Stage");
+                UIManager.UIInstance.LoadScene("StageTY");
                 break;
             case 3:
-                UIManager.UIInstance.LoadScene("Stage");
+                UIManager.UIInstance.LoadScene("StageHG");
                 break;
             default:
                 Debug.Log("범위를 벗어난 값이 들어옴.");
