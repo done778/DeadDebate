@@ -262,22 +262,21 @@ public class EnemySpawner : MonoBehaviour
             yield break;
         }
         //경고 UI 표시 시작
-        OnBossWarningStart?.Invoke(); 
+        OnBossWarningStart?.Invoke();
 
         yield return new WaitForSeconds(warningTime);
 
         //경고 UI 표시 끝
-        OnBossWarningEnd?.Invoke(); 
-
+        OnBossWarningEnd?.Invoke();
+        //EnemyPool.Instance.AllReturn();
 
         Vector3 spawnPosition = playerTransform.position + Random.insideUnitSphere * 40f;
         spawnPosition.y = 0f;
 
         //todo : 추후 보스컨트롤러 작성
         GameObject boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
-        boss.transform.localScale *= 20f;
         EnemyController controller = boss.GetComponent<EnemyController>();
-        EnemyBossInit(controller,changeValue);
+        EnemyBossInit(controller, changeValue);
     }
 
     private void EnemyInit(EnemyController controller)
@@ -294,9 +293,13 @@ public class EnemySpawner : MonoBehaviour
     {
         if (controller != null)
         {
-            controller.Init(GameManager.Instance.player, (int)changeValue, true);
+            controller.Init(GameManager.Instance.player, 1, true);
             controller.OnDeath += HandleEnemyDeath;
             currentEnemyCount++;
+            if (controller.isBoss)
+            {
+                EnemyPool.Instance.SetBoss(controller);
+            }
         }
     }
     #endregion

@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SubsystemsImplementation;
 
 public class EnemyController : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class EnemyController : MonoBehaviour
     private EnemyData currentStat;
     public EnemyData CurrentStat => currentStat;
 
-    private bool isBoss = false;
+    [HideInInspector]
+    public bool isBoss = false;
     private bool isAttack = true;
     private bool isDie = false;
     private float attackTime;
@@ -44,7 +46,9 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        if(!TryGetComponent(out anim)){
+            Debug.LogError("animator가 없음");
+        }
 
         currentStat = data.GetCopy();
     }
@@ -163,7 +167,7 @@ public class EnemyController : MonoBehaviour
         if (!isAttack) return;
 
         isAttack = false;
-        anim.SetTrigger("Attack");
+        anim?.SetTrigger("Attack");
 
         if (attackCoroutine != null) StopCoroutine(attackCoroutine);
         attackCoroutine = StartCoroutine(AttackDelay());
@@ -183,12 +187,18 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator RetrunDelay(float timer)
     {
+        EnemyPool.Instance.OnDeathAction();
         yield return new WaitForSeconds(timer);
 
-        OnDeath = null;
-        attackCoroutine = null;
-
-        EnemyPool.Instance.ReturnEnemy(gameObject);
+        if (isBoss)
+        {
+            EnemyPool.Instance.GetEnemies().Remove(this);
+            Destroy(gameObject);
+        }
+        else
+        {
+            EnemyPool.Instance.ReturnEnemy(gameObject);
+        }
     }
 
     private bool IsTagetInRange()
@@ -207,11 +217,15 @@ public class EnemyController : MonoBehaviour
         isDie = true;
 
         OnDeath?.Invoke();
-        anim.SetTrigger("Die");
+
+        anim?.SetTrigger("Die");
         col.enabled = false;
+        OnDeath = null;
+        attackCoroutine = null;
 
         target.GetExp(currentStat.exp);
         StartCoroutine(RetrunDelay(4f));
     }
+
     #endregion
 }

@@ -16,6 +16,8 @@ public class EnemyPool : MonoBehaviour
     private Dictionary<ENEMY_TYPE, Queue<GameObject>> pool = new Dictionary<ENEMY_TYPE, Queue<GameObject>>();
     //현재까지 생성된 적들 리스트
     private List<EnemyController> enemies = new List<EnemyController>();
+    public GameObject Boss{ get; private set; }
+
     //적이 죽었을 때의 이벤트
     public event Action OnDeath;
 
@@ -101,14 +103,35 @@ public class EnemyPool : MonoBehaviour
         return enemy;
     }
 
+    public void OnDeathAction()
+    {
+        OnDeath?.Invoke();
+    }
+
     public void ReturnEnemy(GameObject enemy)
     {
         EnemyController controller = enemy.GetComponent<EnemyController>();
 
-        OnDeath?.Invoke();
-
         enemy.SetActive(false);
         enemies.Remove(controller);
         pool[controller.data.enemyType].Enqueue(enemy);
+    }
+
+    public void AllReturn()
+    {
+        foreach (var enemy in enemies)
+        {
+            if (enemy.gameObject.activeInHierarchy && !enemy.isBoss)
+            {
+                enemy.gameObject.SetActive(false);
+                pool[enemy.data.enemyType].Enqueue(enemy.gameObject);
+            }
+        }
+
+        enemies.Clear();
+    }
+
+    public void SetBoss(EnemyController boss){
+        enemies.Add(boss);
     }
 }
