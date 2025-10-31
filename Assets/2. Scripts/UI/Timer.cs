@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour
     {
         GameManager.Instance.OnTimerUpdate += UpdateTimerUI;
         remainTime = GameManager.Instance.SurviveTime;
-        textTimer.text = $"Time : {remainTime / 60:00}:{remainTime % 60:00}";
+        textTimer.text = $"Time  {remainTime / 60:00}:{remainTime % 60:00}";
     }
 
     private void OnDestroy()
