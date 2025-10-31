@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerController CurPlayer { get; private set; }
     public bool Playing { get; private set; }
-    public int SurviveTime { get; private set; }
+    public int SurviveTime { get; set; }
     public int SelectedPlayerType { get; private set; }
 
     // 싱글톤
