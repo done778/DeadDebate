@@ -69,7 +69,7 @@ public class StageManager : MonoBehaviour
         if (ruleTimers[rule.enemyType] >= rule.spawnInterval)
         {
             //필드 내 최대 개체 수 확인
-            int currentEnemyCount = EnemyPool.Instance.GetEnemies().Count;
+            int currentEnemyCount = EnemyPool.Instance.GetEnemies(rule.enemyType);
             if (currentEnemyCount < rule.maxCount)
             {
                 SpawnEnemy(rule);

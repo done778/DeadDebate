@@ -18,7 +18,6 @@ public class EnemyPool : MonoBehaviour
     private List<EnemyController> enemies = new List<EnemyController>();
     //적이 죽었을 때의 이벤트
     public event Action OnDeath;
-    public int currentEnemyCount = 0;
 
     private void Awake()
     {
@@ -64,6 +63,11 @@ public class EnemyPool : MonoBehaviour
         }
 
         return enemies;
+    }
+
+    public int GetEnemies(ENEMY_TYPE type)
+    {
+        return pool[type].Select(x => x.activeInHierarchy).Count();
     }
 
     public EnemyController GetEnemy(ENEMY_TYPE type, Vector3 pos)
