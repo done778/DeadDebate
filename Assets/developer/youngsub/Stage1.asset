@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be33d5aee7e3f6e40b51d31d418256de, type: 3}
+  m_Name: Stage1
+  m_EditorClassIdentifier: 
+  stageName: 'Stage 1 : Volcano'
+  spawnRules:
+  - startTime: 10
+    endTime: 60
+    enemyType: 0
+    spawnInterval: 10
+    maxCount: 500
+    pattern: 1
+    circleRadius: 20
+    circleCount: 20
+    SwarmDistance: 0
+    swarmMaxCount: 0
+    dispersion: 0
+    lineCount: 0
+    lineGap: 0
+    lineDistance: 0
+    changeValue: 0
+    warningTime: 0
+  - startTime: 0
+    endTime: 180
+    enemyType: 1
+    spawnInterval: 1
+    maxCount: 500
+    pattern: 0
+    circleRadius: 20
+    circleCount: 20
+    SwarmDistance: 0
+    swarmMaxCount: 0
+    dispersion: 0
+    lineCount: 0
+    lineGap: 0
+    lineDistance: 0
+    changeValue: 0
+    warningTime: 0
+  - startTime: 0
+    endTime: 180
+    enemyType: 2
+    spawnInterval: 5
+    maxCount: 500
+    pattern: 2
+    circleRadius: 20
+    circleCount: 20
+    SwarmDistance: 20
+    swarmMaxCount: 5
+    dispersion: 7
+    lineCount: 0
+    lineGap: 0
+    lineDistance: 0
+    changeValue: 0
+    warningTime: 0
+  - startTime: 0
+    endTime: 180
+    enemyType: 3
+    spawnInterval: 10
+    maxCount: 500
+    pattern: 3
+    circleRadius: 20
+    circleCount: 20
+    SwarmDistance: 0
+    swarmMaxCount: 5
+    dispersion: 7
+    lineCount: 10
+    lineGap: 2
+    lineDistance: 30
+    changeValue: 0
+    warningTime: 0
