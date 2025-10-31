@@ -69,7 +69,7 @@ public class EnemyPool : MonoBehaviour
 
     public int GetEnemies(ENEMY_TYPE type)
     {
-        return pool[type].Select(x => x.activeInHierarchy).Count();
+        return pool[type].Where(x => x.activeInHierarchy).Count();
     }
 
     public EnemyController GetEnemy(ENEMY_TYPE type, Vector3 pos)
