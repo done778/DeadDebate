@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bullet;
     private Renderer rend;
+    private Color originalColor; // 기본색깔
+
     private float elapsedCoolTime; // 쿨타임 경과 시간
 
     private int experience; // 경험치
@@ -40,9 +42,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        attackModeController = GetComponent<AttackModeController>(); // 공격모드
+        attackModeController = GetComponent<AttackModeController>(); // 공격모드        
+        rend = GetComponentInChildren<Renderer>();
 
-        rend = transform.GetChild(0).GetComponent<Renderer>();
+        if (rend != null)
+        {
+            originalColor = rend.material.color; // 기본색깔
+        }    
 
         level = 1;
         expRequired = 3;
@@ -91,12 +97,18 @@ public class PlayerController : MonoBehaviour
         return inputDirection.normalized;
     }
 
-    IEnumerator TakeDamage()
+    IEnumerator TakeDamageColorEffect()
     {
         isInvincibilityl = true;
-        yield return new WaitForSeconds(0.2f);
-        rend.material.color = Color.yellow;
+        if (rend != null)
+        {
+            rend.material.color = Color.blue;
+        }
         yield return new WaitForSeconds(0.3f);
+        if (rend != null)
+        {
+            rend.material.color = originalColor;
+        }
         isInvincibilityl = false;
     }
 
@@ -113,8 +125,8 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        rend.material.color = Color.blue;
-        StartCoroutine(TakeDamage());
+        
+        StartCoroutine(TakeDamageColorEffect());
         Debug.Log($"현재체력: {currentHp}");
     }
 
