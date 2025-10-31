@@ -29,10 +29,11 @@ public class ElectricitySkill : SkillBase
             var enemy = hit.GetComponentInParent<EnemyController>();
             if (enemy != null)
             {
-               enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage);
 
             }
 
+        }
     }
     private void OnDrawGizmosSelected()
     {
