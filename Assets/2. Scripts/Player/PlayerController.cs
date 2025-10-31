@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,9 +81,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //적 몸박시
         if (other.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(1);
+        }
+
+        //적 총알과 충돌시
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            TakeDamage(1);
+            ObjectManager.Instance.ReturnBullet(other.gameObject);
         }
     }
 
@@ -173,6 +181,8 @@ public class PlayerController : MonoBehaviour
     {
         level++;
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
+
+        expRequired = Mathf.FloorToInt(3 * Mathf.Pow(level, 1.5f));
 
         OnLevelUp?.Invoke(level); // 레벨업시
     }
