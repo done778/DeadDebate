@@ -63,6 +63,10 @@ public class EnemyController : MonoBehaviour
         {
             TakeDamage(GameManager.Instance.CurPlayer.attackPower);
             ObjectManager.Instance.ReturnBullet(other.gameObject);
+
+            //총알 피격 이펙트
+            //Vector3 hitPoint = other.ClosestPoint(transform.position);
+            //ParticleManager.Instance.PlayEffect("EnemyHitEffect", hitPoint);
         }
     }
     // Update is called once per frame
