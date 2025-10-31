@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.SurviveTime = currentStageData.surviveTime;
+        isBossSpawn = false;
     }
 
     void Update()
