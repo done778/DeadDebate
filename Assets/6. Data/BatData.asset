@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e2c22c282793740908a2ac4a0a7de9, type: 3}
   m_Name: BatData
   m_EditorClassIdentifier: 
-  healthPoint: 3
-  attakPower: 1
-  exp: 1
-  moveSpeed: 2
+  healthPoint: 7
+  attakPower: 2
+  exp: 3
+  moveSpeed: 7
   attackSpeed: 1
   range: 7
   enemyType: 1
