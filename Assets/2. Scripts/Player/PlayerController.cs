@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     private bool isInvincibilityl; // 무적
 
     private AttackModeController attackModeController; // 공격모드
+
+    private Vector3 inputDirection;
+    public Vector3 InputDirection{ get{ return inputDirection; } }
 
     //이벤트
     public event Action<int> OnLevelUp;
@@ -86,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 inputDirection = GetNormalizedDirection();
+        inputDirection = GetNormalizedDirection();
         Move(inputDirection);
 
         elapsedCoolTime -= Time.deltaTime;
