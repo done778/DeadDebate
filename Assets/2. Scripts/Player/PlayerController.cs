@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -173,6 +173,8 @@ public class PlayerController : MonoBehaviour
     {
         level++;
         Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
+
+        expRequired = Mathf.FloorToInt(3 * Mathf.Pow(level, 1.5f));
 
         OnLevelUp?.Invoke(level); // 레벨업시
     }
