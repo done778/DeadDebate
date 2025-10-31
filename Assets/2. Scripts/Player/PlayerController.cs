@@ -81,9 +81,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //적 몸박시
         if (other.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(1);
+        }
+
+        //적 총알과 충돌시
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            TakeDamage(1);
+            ObjectManager.Instance.ReturnBullet(other.gameObject);
         }
     }
 
