@@ -10,14 +10,15 @@ public class EnemyPool : MonoBehaviour
 
     [Header("Enemy Setting")]
     public List<GameObject> prefabs = new List<GameObject>();
-    //타입 당 미리 생성될 적의 마리수
-    public int count = 50;
+    //타입 당 미리 생성될 적의 마리수 300마리 정도 넉넉하게 잡기
+    public int count = 300;
 
     private Dictionary<ENEMY_TYPE, Queue<GameObject>> pool = new Dictionary<ENEMY_TYPE, Queue<GameObject>>();
     //현재까지 생성된 적들 리스트
     private List<EnemyController> enemies = new List<EnemyController>();
     //적이 죽었을 때의 이벤트
     public event Action OnDeath;
+    public int currentEnemyCount = 0;
 
     private void Awake()
     {

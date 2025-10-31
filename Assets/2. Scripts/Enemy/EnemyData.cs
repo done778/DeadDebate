@@ -10,7 +10,7 @@ public enum ATTAK_TYPE {
 }
 public enum ENEMY_TYPE
 {
-    Warrior,Archer
+    Slime, Bat, Ghost, Rabbit,
 }
 
 
