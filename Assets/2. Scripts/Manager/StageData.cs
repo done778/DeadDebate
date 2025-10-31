@@ -6,5 +6,6 @@ using UnityEngine;
 public class StageData : ScriptableObject
 {
     public string stageName = "Stage 1 : Volcano";
+    public int surviveTime = 180;
     public List<SpawnRule> spawnRules = new List<SpawnRule>();
 }
