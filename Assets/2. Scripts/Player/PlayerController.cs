@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public int attackPower = 1; // 공격력
     [SerializeField] private int maxHp = 5; // 최대 체력
     private int currentHp = 0; // 현재 체력
-    [SerializeField] private float attackRange = 10f; // 공격사거리
+    [SerializeField] private float attackRange = 20f; // 공격사거리
     public float AttackRange => attackRange;
 
 
