@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e2c22c282793740908a2ac4a0a7de9, type: 3}
   m_Name: RabbitData
   m_EditorClassIdentifier: 
-  healthPoint: 10
+  healthPoint: 8
   attakPower: 2
   exp: 5
-  moveSpeed: 10
+  moveSpeed: 7
   attackSpeed: 1
   range: 1.5
   enemyType: 3
