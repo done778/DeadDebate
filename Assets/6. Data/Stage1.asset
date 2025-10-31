@@ -28,6 +28,8 @@ MonoBehaviour:
     lineCount: 0
     lineGap: 0
     lineDistance: 0
+    bossSpawnTime: 0
+    bossPrefab: {fileID: 0}
     changeValue: 0
     warningTime: 0
   - startTime: 0
@@ -44,6 +46,8 @@ MonoBehaviour:
     lineCount: 0
     lineGap: 0
     lineDistance: 0
+    bossSpawnTime: 0
+    bossPrefab: {fileID: 0}
     changeValue: 0
     warningTime: 0
   - startTime: 0
@@ -60,6 +64,8 @@ MonoBehaviour:
     lineCount: 0
     lineGap: 0
     lineDistance: 0
+    bossSpawnTime: 0
+    bossPrefab: {fileID: 0}
     changeValue: 0
     warningTime: 0
   - startTime: 0
@@ -76,5 +82,25 @@ MonoBehaviour:
     lineCount: 10
     lineGap: 2
     lineDistance: 30
+    bossSpawnTime: 0
+    bossPrefab: {fileID: 0}
     changeValue: 0
+    warningTime: 0
+  - startTime: 0
+    endTime: 180
+    enemyType: 3
+    spawnInterval: 10
+    maxCount: 500
+    pattern: 4
+    circleRadius: 20
+    circleCount: 20
+    SwarmDistance: 0
+    swarmMaxCount: 5
+    dispersion: 7
+    lineCount: 10
+    lineGap: 2
+    lineDistance: 30
+    bossSpawnTime: 5
+    bossPrefab: {fileID: 1000013175867634, guid: 5a646f3f4c02e7441858b7c683c43734, type: 3}
+    changeValue: 3
     warningTime: 0
