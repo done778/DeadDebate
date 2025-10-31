@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     //private PlayerAnimatorController playerAnimatorController; // 모션
 
     private Vector3 inputDirection;
-    public Vector3 InputDirection{ get{ return inputDirection; } }
+    public Vector3 InputDirection { get { return inputDirection; } }
 
     //이벤트
     public event Action<int> OnLevelUp;
@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
     public event Action OnPlayerDie;
 
     //이동 가능 영역
-    private Vector3 minWorldBounds;
-    private Vector3 maxWorldBounds;
+    private float minWorldBounds;
+    private float maxWorldBounds;
     Vector3 limitPos;
 
     private void Start()
@@ -60,14 +60,15 @@ public class PlayerController : MonoBehaviour
         if (plane != null)
         {
             Bounds movableArea = plane.GetComponent<MeshRenderer>().bounds;
-            minWorldBounds = movableArea.center - movableArea.extents;
-            maxWorldBounds = movableArea.center + movableArea.extents;
+            minWorldBounds = movableArea.center.x - (plane.transform.localScale.x / 2);
+            maxWorldBounds = movableArea.center.z + (plane.transform.localScale.z / 2);
+
         }
 
         if (rend != null)
         {
             originalColor = rend.material.color; // 기본색깔
-        }    
+        }
 
         level = 1;
         expRequired = 3;
@@ -156,7 +157,7 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        
+
         StartCoroutine(TakeDamageColorEffect());
         Debug.Log($"현재체력: {currentHp}");
     }
@@ -168,8 +169,8 @@ public class PlayerController : MonoBehaviour
         Vector3 move = direction * Time.deltaTime * moveSpeed;
         transform.Translate(move, Space.World);
         limitPos = transform.position;
-        limitPos.x = Mathf.Clamp(transform.position.x, minWorldBounds.x, maxWorldBounds.x);
-        limitPos.z = Mathf.Clamp(transform.position.z, minWorldBounds.z, maxWorldBounds.z);
+        limitPos.x = Mathf.Clamp(transform.position.x, minWorldBounds, maxWorldBounds);
+        limitPos.z = Mathf.Clamp(transform.position.z, minWorldBounds, maxWorldBounds);
         transform.position = limitPos;
     }
 
