@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,10 +40,24 @@ public class PlayerController : MonoBehaviour
     public event Action<int, int> OnHpChanged;
     public event Action OnPlayerDie;
 
+    //이동 가능 영역
+    private Vector3 minWorldBounds;
+    private Vector3 maxWorldBounds;
+    Vector3 limitPos;
+
     private void Start()
     {
         attackModeController = GetComponent<AttackModeController>(); // 공격모드        
         rend = GetComponentInChildren<Renderer>();
+
+        // 플레이어 이동 가능 영역 불러오기
+        GameObject plane = GameObject.Find("PlayableArea");
+        if (plane != null)
+        {
+            Bounds movableArea = plane.GetComponent<MeshRenderer>().bounds;
+            minWorldBounds = movableArea.center - movableArea.extents;
+            maxWorldBounds = movableArea.center + movableArea.extents;
+        }
 
         if (rend != null)
         {
@@ -136,6 +150,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = direction * Time.deltaTime * moveSpeed;
         transform.Translate(move, Space.World);
+        limitPos = transform.position;
+        limitPos.x = Mathf.Clamp(transform.position.x, minWorldBounds.x, maxWorldBounds.x);
+        limitPos.z = Mathf.Clamp(transform.position.z, minWorldBounds.z, maxWorldBounds.z);
+        transform.position = limitPos;
     }
 
     public void GetExp(int amount)
