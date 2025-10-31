@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bullet;
     private Renderer rend;
+    private Color originalColor; // 기본색깔
+
     private float elapsedCoolTime; // 쿨타임 경과 시간
 
     private int experience; // 경험치
@@ -38,11 +40,29 @@ public class PlayerController : MonoBehaviour
     public event Action<int, int> OnHpChanged;
     public event Action OnPlayerDie;
 
+    //이동 가능 영역
+    private Vector3 minWorldBounds;
+    private Vector3 maxWorldBounds;
+    Vector3 limitPos;
+
     private void Start()
     {
-        attackModeController = GetComponent<AttackModeController>(); // 공격모드
+        attackModeController = GetComponent<AttackModeController>(); // 공격모드        
+        rend = GetComponentInChildren<Renderer>();
 
-        rend = transform.GetChild(0).GetComponent<Renderer>();
+        // 플레이어 이동 가능 영역 불러오기
+        GameObject plane = GameObject.Find("PlayableArea");
+        if (plane != null)
+        {
+            Bounds movableArea = plane.GetComponent<MeshRenderer>().bounds;
+            minWorldBounds = movableArea.center - movableArea.extents;
+            maxWorldBounds = movableArea.center + movableArea.extents;
+        }
+
+        if (rend != null)
+        {
+            originalColor = rend.material.color; // 기본색깔
+        }    
 
         level = 1;
         expRequired = 3;
@@ -91,12 +111,18 @@ public class PlayerController : MonoBehaviour
         return inputDirection.normalized;
     }
 
-    IEnumerator TakeDamage()
+    IEnumerator TakeDamageColorEffect()
     {
         isInvincibilityl = true;
-        yield return new WaitForSeconds(0.2f);
-        rend.material.color = Color.yellow;
+        if (rend != null)
+        {
+            rend.material.color = Color.blue;
+        }
         yield return new WaitForSeconds(0.3f);
+        if (rend != null)
+        {
+            rend.material.color = originalColor;
+        }
         isInvincibilityl = false;
     }
 
@@ -113,8 +139,8 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        rend.material.color = Color.blue;
-        StartCoroutine(TakeDamage());
+        
+        StartCoroutine(TakeDamageColorEffect());
         Debug.Log($"현재체력: {currentHp}");
     }
 
@@ -124,6 +150,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = direction * Time.deltaTime * moveSpeed;
         transform.Translate(move, Space.World);
+        limitPos = transform.position;
+        limitPos.x = Mathf.Clamp(transform.position.x, minWorldBounds.x, maxWorldBounds.x);
+        limitPos.z = Mathf.Clamp(transform.position.z, minWorldBounds.z, maxWorldBounds.z);
+        transform.position = limitPos;
     }
 
     public void GetExp(int amount)
