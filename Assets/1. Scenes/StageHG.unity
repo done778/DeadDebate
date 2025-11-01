@@ -2637,6 +2637,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750306583}
   m_CullTransparentMesh: 1
+--- !u!4 &788986791 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4924698900033302781, guid: d60ca11c9fc378043bb73798645bc6f2, type: 3}
+  m_PrefabInstance: {fileID: 1593427851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &794480893
 GameObject:
   m_ObjectHideFlags: 0
@@ -7794,6 +7799,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17e5442437535f54da08fbf161d2c788, type: 3}
+--- !u!1 &2092017419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2092017421}
+  - component: {fileID: 2092017420}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2092017420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092017419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2be599115d74e844a50b09738a0916a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStageData: {fileID: 11400000, guid: 9ffcc06fdd1569144b0e39b1e7ab893b, type: 2}
+  spawner: {fileID: 2099206311}
+  playerTransform: {fileID: 788986791}
+  spawnRadius: 20
+--- !u!4 &2092017421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092017419}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.98310554, z: 0.2745207}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099206310
 GameObject:
   m_ObjectHideFlags: 0
@@ -7860,6 +7913,8 @@ MonoBehaviour:
   prefabs:
   - {fileID: 1000013175867634, guid: 5a646f3f4c02e7441858b7c683c43734, type: 3}
   - {fileID: 1000011593744314, guid: f84dda5cef6f2194c99e6a5be1d20993, type: 3}
+  - {fileID: 5016109369546987316, guid: fb5ece471d02d534fa91267b7da0f078, type: 3}
+  - {fileID: 1000013175867634, guid: 5a646f3f4c02e7441858b7c683c43734, type: 3}
   count: 50
 --- !u!1001 &2122219018
 PrefabInstance:
@@ -7949,6 +8004,7 @@ SceneRoots:
   - {fileID: 627676198}
   - {fileID: 106819349}
   - {fileID: 1245294225}
+  - {fileID: 2092017421}
   - {fileID: 1593427851}
   - {fileID: 1520949629}
   - {fileID: 1956157759}
