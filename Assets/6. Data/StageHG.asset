@@ -20,15 +20,15 @@ MonoBehaviour:
     enemyType: 0
     spawnInterval: 8
     maxCount: 200
-    pattern: 1
+    pattern: 3
     circleRadius: 10
     circleCount: 3
     SwarmDistance: 0
     swarmMaxCount: 0
     dispersion: 0
-    lineCount: 0
-    lineGap: 0
-    lineDistance: 0
+    lineCount: 4
+    lineGap: 3
+    lineDistance: 4
     bossSpawnTime: 0
     bossPrefab: {fileID: 0}
     changeValue: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
     enemyType: 2
     spawnInterval: 3
     maxCount: 200
-    pattern: 3
+    pattern: 0
     circleRadius: 10
     circleCount: 10
     SwarmDistance: 0
