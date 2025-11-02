@@ -17,7 +17,7 @@ MonoBehaviour:
   spawnRules:
   - startTime: 0
     endTime: 180
-    enemyType: 0
+    enemyType: 1
     spawnInterval: 8
     maxCount: 200
     pattern: 3
@@ -35,10 +35,10 @@ MonoBehaviour:
     warningTime: 0
   - startTime: 0
     endTime: 180
-    enemyType: 1
+    enemyType: 0
     spawnInterval: 1
     maxCount: 200
-    pattern: 0
+    pattern: 1
     circleRadius: 10
     circleCount: 10
     SwarmDistance: 0
