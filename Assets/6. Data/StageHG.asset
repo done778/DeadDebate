@@ -15,20 +15,56 @@ MonoBehaviour:
   stageName: HorseTemple
   surviveTime: 180
   spawnRules:
-  - startTime: 10
-    endTime: 60
+  - startTime: 0
+    endTime: 180
+    enemyType: 1
+    spawnInterval: 8
+    maxCount: 200
+    pattern: 3
+    circleRadius: 10
+    circleCount: 3
+    SwarmDistance: 0
+    swarmMaxCount: 0
+    dispersion: 0
+    lineCount: 4
+    lineGap: 3
+    lineDistance: 4
+    bossSpawnTime: 0
+    bossPrefab: {fileID: 0}
+    changeValue: 0
+    warningTime: 0
+  - startTime: 0
+    endTime: 180
     enemyType: 0
-    spawnInterval: 10
-    maxCount: 500
+    spawnInterval: 1
+    maxCount: 200
     pattern: 1
-    circleRadius: 20
-    circleCount: 20
+    circleRadius: 10
+    circleCount: 10
     SwarmDistance: 0
     swarmMaxCount: 0
     dispersion: 0
     lineCount: 0
     lineGap: 0
     lineDistance: 0
+    bossSpawnTime: 0
+    bossPrefab: {fileID: 0}
+    changeValue: 0
+    warningTime: 0
+  - startTime: 0
+    endTime: 180
+    enemyType: 2
+    spawnInterval: 3
+    maxCount: 200
+    pattern: 0
+    circleRadius: 10
+    circleCount: 10
+    SwarmDistance: 0
+    swarmMaxCount: 0
+    dispersion: 0
+    lineCount: 5
+    lineGap: 1
+    lineDistance: 40
     bossSpawnTime: 0
     bossPrefab: {fileID: 0}
     changeValue: 0

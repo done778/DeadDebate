@@ -16,7 +16,7 @@ MonoBehaviour:
   surviveTime: 180
   spawnRules:
   - startTime: 0
-    endTime: 40
+    endTime: 80
     enemyType: 0
     spawnInterval: 3
     maxCount: 40
@@ -34,7 +34,7 @@ MonoBehaviour:
     changeValue: 0
     warningTime: 0
   - startTime: 30
-    endTime: 75
+    endTime: 120
     enemyType: 1
     spawnInterval: 5
     maxCount: 30
@@ -52,7 +52,7 @@ MonoBehaviour:
     changeValue: 0
     warningTime: 0
   - startTime: 70
-    endTime: 120
+    endTime: 170
     enemyType: 3
     spawnInterval: 5
     maxCount: 30

@@ -208,6 +208,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "HealthPoint":
                 maxHp += 1;
+                currentHp += 1;
                 OnHpChanged?.Invoke(currentHp, maxHp);
                 Debug.Log($"최대체력 증가!! 현재 최대체력: {maxHp}");
                 break;
