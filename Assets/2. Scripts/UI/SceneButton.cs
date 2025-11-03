@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 public class SceneButton : MonoBehaviour
 {
     [SerializeField] string SceneName;
