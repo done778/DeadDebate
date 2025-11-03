@@ -58,11 +58,6 @@ public class EnemyPool : MonoBehaviour
     //현재까지 생성된 에너미 정보들
     public List<EnemyController> GetEnemies()
     {
-        if (enemies.Count == 0)
-        {
-            Debug.LogError("생성된 적이 없습니다.");
-        }
-
         return enemies;
     }
 

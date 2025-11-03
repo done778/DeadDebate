@@ -63,9 +63,27 @@ MonoBehaviour:
     swarmMaxCount: 0
     dispersion: 0
     lineCount: 5
-    lineGap: 1
+    lineGap: 3
     lineDistance: 40
     bossSpawnTime: 0
     bossPrefab: {fileID: 0}
     changeValue: 0
     warningTime: 0
+  - startTime: 0
+    endTime: 180
+    enemyType: 2
+    spawnInterval: 3
+    maxCount: 200
+    pattern: 4
+    circleRadius: 10
+    circleCount: 10
+    SwarmDistance: 0
+    swarmMaxCount: 0
+    dispersion: 0
+    lineCount: 5
+    lineGap: 3
+    lineDistance: 40
+    bossSpawnTime: 150
+    bossPrefab: {fileID: 1592259923474775037, guid: 5deba8dae9bb0184da4e8dd11005c52f, type: 3}
+    changeValue: 3
+    warningTime: 5

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: 
   stageName: 'Stage 1 : Volcano'
+  surviveTime: 20
   spawnRules:
   - startTime: 10
     endTime: 60
