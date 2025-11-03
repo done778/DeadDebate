@@ -39,8 +39,8 @@ MonoBehaviour:
     spawnInterval: 1
     maxCount: 200
     pattern: 1
-    circleRadius: 10
-    circleCount: 10
+    circleRadius: 15
+    circleCount: 8
     SwarmDistance: 0
     swarmMaxCount: 0
     dispersion: 0
