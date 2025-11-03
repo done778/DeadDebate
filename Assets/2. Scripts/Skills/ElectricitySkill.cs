@@ -23,7 +23,7 @@ public class ElectricitySkill : SkillBase
         foreach (var hit in hits)
         {
             if (hit.gameObject == player.gameObject) continue;
-            Debug.Log(hit.name);
+            // Debug.Log(hit.name);
             var enemy = hit.GetComponentInParent<EnemyController>();
             if (enemy != null)
             {

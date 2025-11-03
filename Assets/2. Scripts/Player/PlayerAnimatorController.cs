@@ -12,7 +12,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.Log("Animator 연결필요");
+            // Debug.Log("Animator 연결필요");
         }
     }
     public void UpdateMovementAnimation(Vector3 direction)

@@ -94,7 +94,7 @@ public class ObjectManager : MonoBehaviour
 
         if (pool.Count == 0)
         {
-            Debug.LogError($"풀에 오브젝트가 없음");
+            // Debug.LogError($"풀에 오브젝트가 없음");
         }
         else
         {
@@ -113,7 +113,7 @@ public class ObjectManager : MonoBehaviour
         Queue<GameObject> pool = new Queue<GameObject>();
         if (!bulletPool.TryGetValue(name, out pool))
         {
-            Debug.LogError($"{name}타입의 풀이 없습니다");
+            // Debug.LogError($"{name}타입의 풀이 없습니다");
         }
         else
         {

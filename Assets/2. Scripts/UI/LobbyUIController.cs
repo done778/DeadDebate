@@ -25,7 +25,7 @@ public class LobbyUIController : MonoBehaviour
                 UIManager.UIInstance.LoadScene("StageHG");
                 break;
             default:
-                Debug.Log("범위를 벗어난 값이 들어옴.");
+                // Debug.Log("범위를 벗어난 값이 들어옴.");
                 UIManager.UIInstance.LoadScene("Title");
                 break;
         }

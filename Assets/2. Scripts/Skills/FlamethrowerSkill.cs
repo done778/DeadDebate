@@ -31,7 +31,7 @@ public class FlamethrowerSkill : SkillBase
         }
         else
         {
-            Debug.Log("miss");
+            // Debug.Log("miss");
         }
     }
 

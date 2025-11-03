@@ -61,7 +61,7 @@ public class ParticleManager : MonoBehaviour
     {
         if (!particlePoolDic.ContainsKey(effectName))
         {
-            Debug.LogError($"{effectName}풀을 찾을 수 없음");
+            // Debug.LogError($"{effectName}풀을 찾을 수 없음");
             return null;
         }
 
@@ -106,7 +106,7 @@ public class ParticleManager : MonoBehaviour
         ParticlePool poolData = particlePools.Find(p => p.name == effectName);
         if (poolData == null)
         {
-            Debug.LogError($"{effectName}프리팹을 찾을 수 없음");
+            // Debug.LogError($"{effectName}프리팹을 찾을 수 없음");
             return null;
         }
 

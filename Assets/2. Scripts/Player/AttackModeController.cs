@@ -26,14 +26,14 @@ public class AttackModeController : MonoBehaviour
                 currentMode = handleMode;
                 autoMode.enabled = false;
                 handleMode.enabled = true;
-                Debug.Log("HandleBulletMode");
+                // Debug.Log("HandleBulletMode");
             }
             else
             {
                 currentMode = autoMode;
                 handleMode.enabled = false;
                 autoMode.enabled = true;
-                Debug.Log("AutoBulletMode");
+                // Debug.Log("AutoBulletMode");
             }
         }
     }

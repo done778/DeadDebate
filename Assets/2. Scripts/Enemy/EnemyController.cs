@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         if(!TryGetComponent(out anim)){
-            Debug.LogError("animator가 없음");
+            // Debug.LogError("animator가 없음");
         }
 
         currentStat = data.GetCopy();

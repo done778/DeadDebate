@@ -139,7 +139,7 @@ public class EnemySpawner : MonoBehaviour
         Transform playerTransform = GameManager.Instance.player.transform;
         if (playerTransform == null)
         {
-            Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
+            // Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
             return;
         }
 
@@ -166,7 +166,7 @@ public class EnemySpawner : MonoBehaviour
         Transform playerTransform = GameManager.Instance.player.transform;
         if (playerTransform == null)
         {
-            Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
+            // Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
             return;
         }
 
@@ -184,7 +184,7 @@ public class EnemySpawner : MonoBehaviour
         Transform playerTransform = GameManager.Instance.player.transform;
         if (playerTransform == null)
         {
-            Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
+            // Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
             return;
         }
 
@@ -213,7 +213,7 @@ public class EnemySpawner : MonoBehaviour
         PlayerController player = GameManager.Instance.CurPlayer;
         if (playerTransform == null)
         {
-            Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
+            // Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
             return;
         }
 
@@ -258,7 +258,7 @@ public class EnemySpawner : MonoBehaviour
         PlayerController player = GameManager.Instance.CurPlayer;
         if (playerTransform == null)
         {
-            Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
+            // Debug.LogError("플레이어 Transform을 찾을 수 없습니다.");
             yield break;
         }
         //경고 UI 표시 시작

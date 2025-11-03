@@ -28,7 +28,7 @@ public class StageManager : MonoBehaviour
 
         if (currentStageData == null)
         {
-            Debug.LogError("스테이지 데이터가 없음");
+            // Debug.LogError("스테이지 데이터가 없음");
             return;
         }
 

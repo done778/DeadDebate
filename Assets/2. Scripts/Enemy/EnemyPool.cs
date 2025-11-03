@@ -72,7 +72,7 @@ public class EnemyPool : MonoBehaviour
 
         if (!pool.ContainsKey(type))
         {
-            Debug.LogError($"{type} 해당 타입의 풀이 없음");
+            // Debug.LogError($"{type} 해당 타입의 풀이 없음");
         }
         else
         {
@@ -89,8 +89,8 @@ public class EnemyPool : MonoBehaviour
             }
             else
             {
-                Debug.LogError($"{type} 해당 타입의 적을 다 사용함");
-                //todo : 다 사용하면 새로 생성할지 의논하기
+                // // Debug.LogError($"{type} 해당 타입의 적을 다 사용함");
+                // todo : 다 사용하면 새로 생성할지 의논하기
             }
         }
 

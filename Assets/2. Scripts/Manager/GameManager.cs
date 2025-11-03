@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
         GameObject prefab = prefabManager.GetPrefabFromKey(name);
         if (prefab == null) 
         {
-            Debug.Log($"{name} 프리팹을 찾지 못했습니다.");
+            // Debug.Log($"{name} 프리팹을 찾지 못했습니다.");
         }
         return prefab;
     }

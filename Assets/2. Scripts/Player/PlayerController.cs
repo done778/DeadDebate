@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         }
         
         StartCoroutine(TakeDamageColorEffect());
-        Debug.Log($"현재체력: {currentHp}");
+        // Debug.Log($"현재체력: {currentHp}");
     }
 
     private void Move(Vector3 direction)
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
     private void LevelUp()
     {
         level++;
-        Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
+        // Debug.Log($"레벨이 {level - 1}에서 {level}이 되었습니다.");
 
         expRequired = Mathf.FloorToInt(3 * Mathf.Pow(level, 1.5f));
 
@@ -199,26 +199,26 @@ public class PlayerController : MonoBehaviour
         {
             case "AttackPower":
                 attackPower += 1;
-                Debug.Log($"공격력 증가!! 현재 공격력: {attackPower}");
+                // // Debug.Log($"공격력 증가!! 현재 공격력: {attackPower}");
                 break;
             case "AttackSpeed":
                 increaseAttackSpeed += 0.1f;
                 attackCoolTime = baseAttackCoolTime / (1 + increaseAttackSpeed);
-                Debug.Log($"공격속도 증가!! 현재 공격속도: {(1 + increaseAttackSpeed) * 100}%");
+                // // Debug.Log($"공격속도 증가!! 현재 공격속도: {(1 + increaseAttackSpeed) * 100}%");
                 break;
             case "HealthPoint":
                 maxHp += 1;
                 currentHp += 1;
                 OnHpChanged?.Invoke(currentHp, maxHp);
-                Debug.Log($"최대체력 증가!! 현재 최대체력: {maxHp}");
+                // // Debug.Log($"최대체력 증가!! 현재 최대체력: {maxHp}");
                 break;
             case "MoveSpeed":
                 moveSpeed += 0.5f;
-                Debug.Log($"이동속도 증가!! 현재 이동속도: {moveSpeed}");
+                // // Debug.Log($"이동속도 증가!! 현재 이동속도: {moveSpeed}");
                 break;
 
             default:
-                Debug.Log($"알 수 없는 스탯: {statType}");
+                // // Debug.Log($"알 수 없는 스탯: {statType}");
                 break;
         }
     }
@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
     {
         if (muzzle == null)
         {
-            Debug.LogWarning("Muzzle이 할당되지 않았습니다!");
+            // // Debug.LogWarning("Muzzle이 할당되지 않았습니다!");
             return;
         }
 
