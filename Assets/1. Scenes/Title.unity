@@ -1191,7 +1191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad9b7c44d451ca42bf8b19dd9b55fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSoundEffect: {fileID: 8300000, guid: bc4abe8c2c6a3c446b512bc8caf59586, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 57427fb52e549bc4cafb6251f7c1d794, type: 3}
+  dieSoundEffect: {fileID: 8300000, guid: 55599a2a49ea16546a5ddb90ad97bd64, type: 3}
 --- !u!82 &991266395
 AudioSource:
   m_ObjectHideFlags: 0
