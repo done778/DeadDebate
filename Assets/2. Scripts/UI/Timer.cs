@@ -8,11 +8,11 @@ public class Timer : MonoBehaviour
     public int remainTime;
     public TextMeshProUGUI textTimer;
 
-    private void Awake()
+    private void Start()
     {
-        GameManager.Instance.OnTimerUpdate += UpdateTimerUI;
         remainTime = GameManager.Instance.SurviveTime;
         textTimer.text = $"Time  {remainTime / 60:00}:{remainTime % 60:00}";
+        GameManager.Instance.OnTimerUpdate += UpdateTimerUI;
     }
 
     private void OnDestroy()
