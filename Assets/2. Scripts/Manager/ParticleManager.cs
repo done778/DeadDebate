@@ -81,6 +81,7 @@ public class ParticleManager : MonoBehaviour
         effect.transform.position = position;
         effect.transform.rotation = rotation;
         effect.SetActive(true);
+        SetParticleSystemScale(effect, 0.01f); //파티클 크기조절
         effect.transform.SetParent(null);
 
         //자동반환계산
@@ -140,5 +141,16 @@ public class ParticleManager : MonoBehaviour
         }
 
         return 2f;
+    }
+
+    //파티클 크기조절
+    private void SetParticleSystemScale(GameObject effect, float scaleFactor)
+    {
+        foreach (var particleScale in effect.GetComponentsInChildren<ParticleSystem>())
+        {
+            var main = particleScale.main;
+            main.startSizeMultiplier *= scaleFactor;
+            main.startSpeedMultiplier *= scaleFactor;
+        }
     }
 }

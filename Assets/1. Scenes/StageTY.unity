@@ -693,6 +693,7 @@ MonoBehaviour:
   - name: EnemyHitEffect
     prefab: {fileID: 4163018424492857928, guid: 7a4dafba55b072242922877df48ee59c, type: 3}
     count: 20
+    scaleFactor: 0.01
 --- !u!4 &181907818
 Transform:
   m_ObjectHideFlags: 0

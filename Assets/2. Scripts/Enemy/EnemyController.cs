@@ -70,9 +70,12 @@ public class EnemyController : MonoBehaviour
             GameManager.Instance.IndicateDamage(transform.position, damage);
             ObjectManager.Instance.ReturnBullet(other.gameObject);
 
-            //총알 피격 이펙트
-            //Vector3 hitPoint = other.ClosestPoint(transform.position);
-            //ParticleManager.Instance.PlayEffect("EnemyHitEffect", hitPoint);
+            //총알 피격 이펙트            
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            Vector3 bulletDir = -other.transform.forward;
+            float offsetDistance = 1f; // 이펙트 발생거리(적 살짝앞)
+            Vector3 offsetPos = hitPoint + bulletDir * offsetDistance;
+            ParticleManager.Instance.PlayEffect("EnemyHitEffect", offsetPos);
         }
     }
     // Update is called once per frame
