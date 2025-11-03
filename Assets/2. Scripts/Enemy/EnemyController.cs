@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             // 피격음 출력하려면 아래 코드 주석 해제
-            // AudioManager.Instance.PlayHitSound();
+            AudioManager.Instance.PlayHitSound();
 
             int damage = GameManager.Instance.CurPlayer.attackPower;
             TakeDamage(damage);
