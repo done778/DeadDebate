@@ -17,7 +17,7 @@ public class StageManager : MonoBehaviour
     private Dictionary<ENEMY_TYPE, float> ruleTimers = new Dictionary<ENEMY_TYPE, float>();
     private bool isBossSpawn = false;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.Instance.SurviveTime = currentStageData.surviveTime;
         isBossSpawn = false;
